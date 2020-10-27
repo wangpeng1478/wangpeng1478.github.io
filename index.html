@@ -27,11 +27,7 @@
                 <i class="ico_logo">
 					</i>
             </h1>
-            <ul class="mod_nav">
-                <li>
-                    <a href="clippy/index.html" target="_blank">CSS clip-path 生成器</a>
-                </li>
-            </ul>
+            <ul class="mod_nav"></ul>
         </div>
     </header>
     <section class="wrap">
@@ -689,7 +685,26 @@
     <script src="animation/1459055503.js">
     </script>
     <script>
-        
+        $(function(){
+            var array = [
+                {
+                    title:"clip-path 生成器",
+                    href:"clippy/index.html"
+                },
+                {
+                    title:"代码美化",
+                    href:"https://carbon.now.sh/"
+                },
+                {
+                    title:"浏览器同步",
+                    href:"http://www.browsersync.cn/"
+                },
+            ];
+            for (var index = 0; index < array.length; index++) {
+                var element = array[index];
+                $('.mod_nav').append('<li title="'+element.title+'"><a href="'+element.href+'" target="_blank">'+element.title+'</a></li>');
+            }
+        })
     </script>
 </body>
 </html>
