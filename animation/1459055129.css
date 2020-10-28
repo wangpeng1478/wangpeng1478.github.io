@@ -70,7 +70,7 @@ a:hover{text-decoration:none;color:#f3711f}
 body{background:#f9f9f9}
 .mod_header .inner{width:992px}
 .wrap{padding-top:10px;position:absolute;top:63px;bottom:0;width:100%;background:#fff}
-.mod_side{float:left;width:395px;overflow:auto;height: 588px;}
+.mod_side{float:left;width:395px;overflow:auto;height: 100%}
 .canvas{position:absolute;top:10px;bottom:10px;left:390px;right:10px;background:#20252B}
 .mod_tab{float:left;border-top:1px solid #474748;background:#20252b;color:#ccc}
 .mod_tab li{position:relative;padding:5px;width:15px;border-bottom:1px solid #474748;text-align:center;cursor:pointer}
