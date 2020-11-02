@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="mask-icon" href="https://github.githubassets.com/pinned-octocat.svg" color="#000000">
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://github.githubassets.com/favicons/favicon.png">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <style>
+        html,body{
+            padding:0;
+            margin:0;
+            width:100%;
+            height:100%;
+            overflow: hidden;
+        }
+        iframe{
+            width:100%;
+            height:100%;
+            border: none;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="" frameborder="0"></iframe>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var getSearch = function() {
+                var url = window.location.search;
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.substr(1);
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = unescape(decodeURIComponent(strs[i].split("=")[1]));
+                    }
+                };
+                return theRequest
+            };
+            if(!getSearch().url){
+                alert('参数错误')
+                window.history.back(-1);
+            }else{
+                document.querySelector("body > iframe").src = getSearch().url;
+                document.title = getSearch().title;
+            }
+        })
+    </script>
+</body>
+</html>

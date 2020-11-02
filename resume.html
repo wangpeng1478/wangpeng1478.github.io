@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="mask-icon" href="https://github.githubassets.com/pinned-octocat.svg" color="#000000">
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://github.githubassets.com/favicons/favicon.png">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <style>
+         :root {
+            --BG-0: #ededed;
+            --BG-1: #f7f7f7;
+            --BG-2: #fff;
+            --BG-3: #f7f7f7;
+            --BG-4: #4c4c4c;
+            --BG-5: #fff;
+            --FG-0: rgba(0, 0, 0, 0.9);
+            --FG-1: rgba(12, 11, 11, 0.5);
+            --FG-2: rgba(0, 0, 0, 0.3);
+            --FG-3: rgba(0, 0, 0, 0.1);
+            --FG-4: rgba(0, 0, 0, 0.7);
+            --MainColor: #30404d;
+            --FG: black;
+            --BG: white;
+        }
+        
+        html,
+        body {
+            font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            background-color: var(--BG);
+            line-height: 1.6;
+            color: var(--FG-0);
+            margin: 0;
+            padding: 0;
+        }
+        @media print{.button{display: none}}
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .panel {
+            padding: 15px;
+            margin-bottom: 1em;
+            position: relative;
+        }
+        
+        .panel-top {
+            background-color: rgb(0 0 0 / 5%);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        
+        .p-b-1 {
+            margin-bottom: 0.25em;
+        }
+        
+        .p-b-2 {
+            margin-bottom: 1em;
+        }
+        
+        .f-12 {
+            font-size: 12px;
+        }
+        
+        .f-13 {
+            font-size: 13px;
+        }
+        
+        .f-14 {
+            font-size: 14px;
+        }
+        
+        .f-15 {
+            font-size: 15px;
+        }
+        
+        .f-16 {
+            font-size: 16px;
+        }
+        
+        .f-17 {
+            font-size: 17px;
+        }
+        
+        .panel-title {
+            position: relative;
+            border-bottom: 2px solid var(--MainColor);
+        }
+        
+        .panel-title .panel-title-name {
+            display: inline-block;
+            padding: 5px 50px 5px 8px;
+            background-color: var(--MainColor);
+            color: var(--BG);
+            text-align: center;
+            font-size: 15px;
+            -webkit-clip-path: polygon(0 1%, 80% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(0 1%, 80% 0, 100% 100%, 0% 100%);
+            margin-bottom: -2px;
+        }
+        
+        .inlineBlock {
+            margin: 0.5em 0 0 0;
+        }
+        
+        .inlineBlock table {
+            font-size: 15px;
+            text-align: left;
+        }
+        .inlineBlock table td{
+            padding:0 5px;
+        }
+        
+        .inlineBlock .td-name {
+            width: 4.5em;
+        }
+        
+        ul {
+            line-height: 1.8;
+            color: var(--FG-4);
+        }
+        
+        ol {
+            color: var(--FG-4);
+            margin-block-start: 0.5em;
+            margin-block-end: 0.5em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 0.8em;
+        }
+        
+        ol>li {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <div class="panel-top">
+            <h2 class="p-b-1">王先生</h2>
+            <div class="inlineBlock">
+                <table>
+                    <tr>
+                        <td class="td-name">意向意向:</td>
+                        <td>xxx</td>
+                        <td class="td-name">意向意向:</td>
+                        <td>xxx</td>
+                    </tr>
+                    <tr>
+                        <td class="td-name">意向意向:</td>
+                        <td>xxx</td>
+                        <td class="td-name">意向意向:</td>
+                        <td>xxx</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-title">
+            <div class="panel-title-name">点点听力</div>
+        </div>
+        <ul>
+            <li class="p-b-1">
+                <h4>小程序配置-全局配置</h4>
+                <ol class="f-14">
+                    <li>小程序根目录下的 app.json 文件用来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。完整配置项说明请参考小程序全局配置</li>
+                    <li>每一个小程序页面也可以使用同名 .json 文件来对本页面的窗口表现进行配置，页面中配置项会覆盖 app.json 的 window 中相同的配置项。完整配置项说明请参考小程序页面配置</li>
+                    <li>微信现已开放小程序内搜索，开发者可以通过 sitemap.json 配置，或者管理后台页面收录开关来配置其小程序页面是否允许微信索引。当开发者允许微信索引时，微信会通过爬虫的形式，为小程序的页面内容建立索引。当用户的搜索词条触发该索引时，小程序的页面将可能展示在搜索结果中。 爬虫访问小程序内页面时，会携带特定的 user-agent：mpcrawler 及场景值：1129。需要注意的是，若小程序爬虫发现的页面数据和真实用户的呈现不一致，那么该页面将不会进入索引中。</li>
+                    <li>注：没有 sitemap.json 则默认所有页面都能被索引 注：{"action": "allow", "page": "*"} 是优先级最低的默认规则，未显式指明 "disallow" 的都默认被索引</li>
+                </ol>
+            </li>
+            <li class="p-b-1">
+                <h4>小程序配置-全局配置</h4>
+                <ol class="f-14">
+                    <li>小程序根目录下的 app.json 文件用来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。完整配置项说明请参考小程序全局配置</li>
+                    <li>每一个小程序页面也可以使用同名 .json 文件来对本页面的窗口表现进行配置，页面中配置项会覆盖 app.json 的 window 中相同的配置项。完整配置项说明请参考小程序页面配置</li>
+                    <li>微信现已开放小程序内搜索，开发者可以通过 sitemap.json 配置，或者管理后台页面收录开关来配置其小程序页面是否允许微信索引。当开发者允许微信索引时，微信会通过爬虫的形式，为小程序的页面内容建立索引。当用户的搜索词条触发该索引时，小程序的页面将可能展示在搜索结果中。 爬虫访问小程序内页面时，会携带特定的 user-agent：mpcrawler 及场景值：1129。需要注意的是，若小程序爬虫发现的页面数据和真实用户的呈现不一致，那么该页面将不会进入索引中。</li>
+                    <li>注：没有 sitemap.json 则默认所有页面都能被索引 注：{"action": "allow", "page": "*"} 是优先级最低的默认规则，未显式指明 "disallow" 的都默认被索引</li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <div class="panel">
+        <div class="panel-title">
+            <div class="panel-title-name">点点听力</div>
+        </div>
+        <ul class="f-14">
+            <li class="p-b-1">
+                交通违法、博物馆、出入境、邮政、车管所服务、、城市道路、高速服务、税务、司法、消防、气象、户政、治安、环保、民政、市民中心、教育、水电、工商、体育/福利彩票、图书馆、检验检疫、交通、商务、航空、街道居委、农林畜牧海洋、社科档案、政府应急办、科学技术与地质、统计、经济发展与改革、政务服务大厅、安监、医疗、计划生育、体育、水利、信访、物价粮食、城管、监狱戒毒、海关、住建、人力资源、文化、社会保障、政务民生、交警、边防、国安、公证、检察院、法院、纪检审计、财政、公积金、党团组织、食药监、质监、新闻出版及广电、知识产权、旅游局、烟草管理单位、网信系统
+            </li>
+        </ul>
+    </div>
+
+
+    <div style="margin:5em;text-align: center;" class="button"><button onclick="window.print()" type="button">打印</button></div>
+</body>
+</html>
