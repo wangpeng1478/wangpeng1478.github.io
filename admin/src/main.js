@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import iView from 'view-design'
 import config from '@/config'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import importDirective from '@/directive'
 import 'view-design/dist/styles/iview.css'
 import './index.less'
@@ -46,10 +48,19 @@ Vue.prototype.$echarts = echarts
      */
 importDirective(Vue)
 
+axios.defaults.headers['X-Token'] = Cookies.get('token');
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     store,
-    render: h => h(App)
+    render: h => h(App),
+    watch: {
+        $route: {
+          handler: function () {
+            axios.defaults.headers['X-Token'] = Cookies.get('token');
+          },
+          deep: true
+        }
+      }
 })
