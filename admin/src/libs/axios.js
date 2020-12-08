@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { Notice,Spin } from 'view-design'
 class HttpRequest {
   constructor (baseUrl = baseURL) {
@@ -23,6 +24,7 @@ class HttpRequest {
   interceptors (instance, url) {
     // 请求拦截
     instance.interceptors.request.use(config => {
+      config.headers['x-token']=Cookies.get('token');
       // 添加全局的loading...
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
