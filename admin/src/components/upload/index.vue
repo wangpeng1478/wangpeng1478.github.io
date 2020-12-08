@@ -17,6 +17,7 @@
 <script>
 import COS from "cos-js-sdk-v5";
 import { parseTime } from "@/libs/tools";
+import Cookies from 'js-cookie';
 export default {
   name: "upload",
   props: {
@@ -30,13 +31,22 @@ export default {
       time: new Date().toLocaleString(),
       Bucket: "wxword-1254176432",
       Region: "ap-shanghai",
-      SecretId: "AKIDZx60f4A2cz83nLlkcHiusc9SXNzOmXEj",
-      SecretKey: "PegU4Zv4zg8NOCl5AznNindGfsrb8RWN",
+      SecretId: "",
+      SecretKey: "",
     };
   },
   mounted() {
-    this.initdz();
-    this.initCos();
+    const SecretId = Cookies.get('SecretId');
+    const SecretKey = Cookies.get('token');
+    if(SecretId&&SecretKey){
+      this.SecretId = SecretId;
+      this.SecretKey = SecretKey;
+      this.initdz();
+      this.initCos();
+    }else{
+      this.$Message.warning('参数错误');
+    }
+   
   },
   methods: {
     initdz() {

@@ -43,6 +43,7 @@ export default {
           const data = res.data;
           if(res.status===200&&data){
             commit('setToken', data.token)
+            Cookies.set('SecretId', data.SecretId)
             Cookies.set('setUserNames', data.name)
           }
           resolve(res)

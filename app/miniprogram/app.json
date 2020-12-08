@@ -1,18 +1,18 @@
 {
   "pages": [
-    "pages/search/index",
     "pages/word/index",
+    "pages/search/index",
     "pages/sysType/index",
     "pages/about/index",
     "pages/introduction/index"
   ],
-  "window": {
-    "navigationBarBackgroundColor": "#fdfdfd",
-    "backgroundColor": "#ffffff",
-    "backgroundColorTop": "#ffffff",
-    "backgroundColorBottom": "#ffffff",
-    "navigationBarTitleText": "单词本",
-    "navigationBarTextStyle": "black"
+  "window":{
+    "navigationBarBackgroundColor": "#0081ff",
+    "backgroundColor": "#0081ff",
+    "backgroundColorTop": "#0081ff",
+    "backgroundColorBottom": "#0081ff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white"
   },
   "plugins": {
     "translate-plugin": {
