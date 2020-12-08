@@ -1,0 +1,50 @@
+<import src ="../../template/skeletonSearch/index.wxml"/>
+<import src ="../../template/empty/index.wxml"/>
+<view class="cu-bar search solid-bottom bg-white {{searchFocus||keywordShow?'searchFocus':''}}">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" value="{{keyword}}" maxlength="100" bindinput="bindinputSearch" bindfocus="bindfocusSearch" bindblur="bindblurSearch" always-embed="{{true}}" confirm-hold="{{true}}" placeholder="请输入单词"></input>
+  </view>
+  <view bindtap="cancel" class="cancel text-shadow text-blue">取消</view>
+</view>
+<view class="keywordList solid-top" wx:if="{{keywordShow}}">
+  <scroll-view scroll-y>
+    <template wx:if="{{loading}}" is="skeletonSearch"/>
+    <view class="cells" wx:if="{{keywordList.length>0}}">
+      <view class="cell" wx:for="{{keywordList}}" wx:key="index">
+          <view class="cell__bd">
+            <view class="name">
+              <block wx:for="{{item.nameArr}}" wx:for-item="names"  wx:for-index="idx" wx:key="idx">
+                  <text class="{{names == keyword ? 'text-shadow text-red' : ''}}">{{names}}</text>
+              </block>
+            </view>
+            <view class="translation multi-ellipsis--l2">{{item.translation}}</view>
+          </view>
+          <view class="cell__ft" catchtap>
+            <Play name="{{item.name}}"></Play>
+          </view>
+      </view>
+    </view>
+    <template wx:if="{{keywordListNull}}" is="empty" data="{{keyword:keyword}}" />
+  </scroll-view>
+</view>
+<view class="cu-bar solid-bottom bg-white">
+   <view class="action">
+      <text class="cuIcon-title text-shadow text-blue"></text>
+			<text class="text-lg text-shadow">搜索趋势</text>
+   </view>
+</view>
+<scroll-view class="bg-white heat" scroll-y>
+  <template wx:if="{{heatLoading}}" is="skeletonSearch"/>
+  <view class="cells" wx:if="{{heatList.length>0}}">
+    <view class="cell" wx:for="{{heatList}}" wx:key="index">
+        <view class="cell__bd">
+          <view class="name">{{item.name}}</view>
+          <view class="translation multi-ellipsis--l2">{{item.translation}}</view>
+        </view>
+        <view class="cell__ft" catchtap>
+          <Play name="{{item.name}}"></Play>
+        </view>
+    </view>
+  </view>
+</scroll-view>

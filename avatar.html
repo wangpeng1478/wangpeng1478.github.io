@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
     <style>
+        body{
+            text-align: center;
+        }
         img{
             width:50px;
             height:50px;
@@ -25,16 +28,9 @@
     <img width="256" height="256" avatar="13162855705">
     <img width="256" height="256" avatar="1">
     <img width="256" height="256" avatar="欧阳云顶">
-    <img width="256" height="256" avatar="王朋">
-    <img width="256" height="256" avatar="王朋朋">
+    <img width="256" height="256" avatar="李琛">
+    <img width="256" height="256" avatar="张家辉">
     <script>
-        /**
-         * LetterAvatar
-         * 
-         * Artur Heinze
-         * Create Letter avatar based on Initials
-         * based on https://gist.github.com/leecrossley/6027780
-         */
         (function(w, d) {
             function LetterAvatar(name, size, color) {
                 name = name || 'A';
@@ -123,6 +119,8 @@
             };
             window['LetterAvatar'] = LetterAvatar;
         })(window, document);
+        //直接调用
+        console.log(LetterAvatar('Siri'));
     </script>
 </body>
 

@@ -1,0 +1,50 @@
+@import '~iview/src/styles/index.less';
+
+@menu-dark-title: #001529;
+@menu-dark-active-bg: #000c17;
+@layout-sider-background: #001529;
+
+
+
+.ivu-modal-mask{
+    backdrop-filter: blur(3px);
+}
+.card-view{
+    height: 100%;
+    &>.ivu-card-body{
+        height: 100%;
+    }
+}
+.richText{
+    overflow: hidden;
+}
+.richText pre{
+    color: #ccc;
+    font-size: 25rpx;
+    padding:1em;
+    background-color: #151718;
+    min-width: inherit;
+    position: relative;
+    z-index: 1;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+    overflow-x: auto;
+}
+.richText blockquote {
+    display: block!important;
+    border-left: 8px solid #d0e5f2!important;
+    padding: 5px 0.5em!important;
+    margin: 0.5em 0!important;
+    line-height: 1.6!important;
+    background-color: #f1f1f1!important;
+}
+.richText, .richText *{
+    max-width: 100%!important;
+    box-sizing: border-box!important;
+    -webkit-box-sizing: border-box!important;
+    word-wrap: break-word!important;
+    word-break: normal!important;
+    word-break: break-all!important;
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/search/index",
+    "pages/word/index",
+    "pages/sysType/index",
+    "pages/about/index",
+    "pages/introduction/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#fdfdfd",
+    "backgroundColor": "#ffffff",
+    "backgroundColorTop": "#ffffff",
+    "backgroundColorBottom": "#ffffff",
+    "navigationBarTitleText": "单词本",
+    "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "translate-plugin": {
+      "version": "1.0.16",
+      "provider": "wx664bae4278bcc82c"
+    }
+  },
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "tabBar": {
+    "color": "#515a6e",
+    "selectedColor": "#0081ff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/word/index",
+        "text": "单词",
+        "iconPath": "images/tabBar/2.png",
+        "selectedIconPath": "images/tabBar/2a.png"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "搜索",
+        "iconPath": "images/tabBar/1.png",
+        "selectedIconPath": "images/tabBar/1a.png"
+      },
+      {
+        "pagePath": "pages/about/index",
+        "text": "我的",
+        "iconPath": "images/tabBar/3.png",
+        "selectedIconPath": "images/tabBar/3a.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

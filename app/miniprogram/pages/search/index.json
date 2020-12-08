@@ -1,0 +1,6 @@
+{
+  "disableScroll":true,
+  "usingComponents": {
+    "Play": "../../components/play"
+  }
+}

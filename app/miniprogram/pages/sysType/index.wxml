@@ -1,0 +1,13 @@
+
+<button bindtap="translate">翻译</button>
+<view></view>
+<button bindtap="playTTS">playTTS</button>
+
+<view class="rich-text">
+  <view class="rich-text-view" wx:for="{{richTextList}}" wx:key="index">
+    <view class="rich-text-title">{{item.title}}</view>
+    <view class="rich-text-body">
+      <rich-text class="richText" nodes="{{item.desc}}"></rich-text>
+    </view>
+  </view>
+</view>

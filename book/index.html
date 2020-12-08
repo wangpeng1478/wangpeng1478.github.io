@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="mask-icon" href="https://github.githubassets.com/pinned-octocat.svg" color="#000000">
+    <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://github.githubassets.com/favicons/favicon.png">
+    <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <style>
+        details a{
+            display: block;
+            padding: 4px 10px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function getSub(array, key) {
+            const Arr = [];
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if (element.Address === key) Arr.push(element)
+            }
+            return Arr
+        };
+
+        function Grouping(array) {
+            const Arr = [];
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if (element.isDirectory) {
+                    Arr.push(Object.assign(element, {
+                        sub: getSub(array, `${element.path}`) || []
+                    }))
+                }
+            }
+            return Arr
+        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const xhr = new XMLHttpRequest();
+            xhr.upload.addEventListener("progress", e => {
+                console.log(Math.round(100 * e.loaded / e.total) / 100);
+            }, false);
+            xhr.onreadystatechange = (e) => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    try {
+                        var response = Grouping(JSON.parse(xhr.responseText));
+                        var content = "";
+                        response.forEach(element => {
+                            var sunHtml = '';
+                            var sub = element.sub || [];
+                            sub.forEach(info => {
+                                sunHtml += `<a href="${info.path}" target="_blank">${info.name}</a>`
+                            });
+                            var html = ` <details>
+                                            <summary>${element.name}</summary>
+                                            <div>${sunHtml}</div>
+                                        </details>`;
+                            content += html;
+                        });
+                        document.body.insertAdjacentHTML('beforeEnd', content);
+                    } catch (error) {
+                        alert(error)
+                    }
+                }
+            }
+            xhr.open('GET', "files.json", true);
+            xhr.send();
+        });
+    </script>
+</body>
+
+</html>

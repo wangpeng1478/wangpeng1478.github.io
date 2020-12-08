@@ -1,0 +1,14 @@
+/* miniprogram/pages/sysType/index.wxss */
+.rich-text{
+  margin-bottom: 3em;
+  padding:20rpx;
+}
+.rich-text-view{
+  margin: 2em 0;
+  padding-bottom: 1em;
+  border-bottom: 10rpx solid red;
+}
+.rich-text-title{
+  font-size: 40rpx;
+  padding: 1em 0;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>优品联盟-帮助</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="https://yplm.cn/static/weixin/big/css/weui.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f8f8;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .weui-footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 1em 0;
+            background: #fff;
+        }
+        
+        .weui-cell_access {
+            color: #3d3d3d;
+        }
+        
+        img {
+            width: 20px;
+            margin-right: 5px;
+            display: block;
+            margin-top: 1px;
+        }
+        
+        h2 {
+            padding: 0 15px 1em 15px;
+            color: #282828;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>优品联盟功能使用说明</h2>
+    <div class="weui-cells__title">移动端功能说明</div>
+    <div class="weui-cells" id="wx"></div>
+    <div class="weui-cells__title" style="margin-top:1.5em">PC端功能说明</div>
+    <div class="weui-cells" id="pc"></div>
+    <div class="weui-footer">
+        <p class="weui-footer__text">版权所有：苏州优品联盟质量信息技术有限公司</p>
+    </div>
+    <script>
+        var pc = [
+            {
+                name:"普通会员注册",
+                src:"普通会员注册",
+            }
+        ];
+        var wx = [
+            {
+                name:"普通会员注册",
+                src:"普通会员注册",
+            }
+        ];
+        window.addEventListener('DOMContentLoaded', function() {
+            var pcHtml = '';
+            var wxHtml = '';
+            var href = "";
+            for (var index = 0; index < pc.length; index++) {
+                var element = pc[index];
+                pcHtml += '<a class="weui-cell weui-cell_access" href="'+href+element.src+'">' +
+                    '      <div class="weui-cell__hd">' +
+                    '               <img src="https://yplm.cn/static/help/qb.svg">' +
+                    '       </div>' +
+                    '       <div class="weui-cell__bd">' +
+                    '           <p>'+element.name+'</p>' +
+                    '   </div>' +
+                    '   <div class="weui-cell__ft"></div>' +
+                    '</a>';
+            }
+            for (var index = 0; index < wx.length; index++) {
+                var element = wx[index];
+                wxHtml += '<a class="weui-cell weui-cell_access" href="'+href+element.src+'">' +
+                    '      <div class="weui-cell__hd">' +
+                    '               <img src="https://yplm.cn/static/help/qb.svg">' +
+                    '       </div>' +
+                    '       <div class="weui-cell__bd">' +
+                    '           <p>'+element.name+'</p>' +
+                    '   </div>' +
+                    '   <div class="weui-cell__ft"></div>' +
+                    '</a>';
+            }
+            document.getElementById('pc').insertAdjacentHTML('beforeEnd', pcHtml);
+            document.getElementById('wx').insertAdjacentHTML('beforeEnd', wxHtml);
+        })
+    </script>
+</body>
+
+</html>

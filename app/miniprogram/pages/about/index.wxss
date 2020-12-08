@@ -1,0 +1,56 @@
+page{
+  background-color: var(--ghostWhite);
+}
+.UCenter-bg {
+  background-color: #17171b;
+  background-image:url('https://7761-watch-aag9p-1301797871.tcb.qcloud.la/images/braun_watchfaces.gif?sign=6376772023b1be0ce57313c1e91f563f&t=1586307958');
+  background-size: cover;
+  background-position: center center;
+  height: 550rpx;
+  display: flex;
+  justify-content: center;
+  padding-top: 40rpx;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  transition: background 1s ease-out;
+}
+
+
+.UCenter-bg text {
+  opacity: 0.8;
+}
+
+.UCenter-bg .png {
+  width:100rpx;
+  height:100rpx;
+  border-radius:50%;
+  overflow: hidden;
+}
+
+.UCenter-bg .gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+  opacity: 0.1;
+}
+
+map,.mapBox{
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+
+map,.mapBox{
+  width: 750rpx;
+  height: 300rpx;
+}

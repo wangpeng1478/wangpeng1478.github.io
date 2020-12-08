@@ -1,0 +1,4 @@
+<view class="playview" data-name="{{name}}" bindtap="play">
+  <view wx:if="{{loading}}" class="loading"></view>
+  <view wx:else class="play {{playing?'playing':''}}"></view>
+</view>

@@ -1,0 +1,129 @@
+.heat {
+  height: calc(100vh - 200rpx);
+}
+
+
+.cells {
+  margin-top: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cells:before {
+  /* content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  z-index: 2; */
+}
+
+.cells:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  z-index: 2;
+}
+
+.cell {
+  padding: 30rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cell:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  left: 16px;
+  z-index: 2;
+}
+.cell:nth-child(1):before{
+  display: none;
+}
+.cell:active {
+  /* background-color: #ececec; */
+  opacity:0.8;
+}
+
+.cell__bd {
+  flex: 1;
+}
+
+.cell__ft {
+  padding-left: 0.5em;
+}
+
+.cell__bd .name {
+  font-size: 38rpx;
+  font-weight:bold;
+}
+
+.cell__bd .translation {
+  font-size: 23rpx;
+  margin-top:0.5em;
+  color: #9c9da1;
+}
+
+.search .cancel{
+  width:0;
+  height:0;
+  transition: opacity 0.5s ease-in-out , transform 0.5s ease-in-out; 
+  opacity:0;
+  transform: scale(0.3);
+}
+.search .search-form{
+  transition: width 1s ease-in-out; 
+}
+.searchFocus .search-form{
+  margin: 0 15rpx 0 30rpx;
+  position: relative;
+}
+.searchFocus .cancel{
+  width:auto;
+  height:auto;
+  margin: 0 30rpx 0 0;
+  opacity:1;
+  transform: scale(1);
+}
+
+.keywordList{
+  position: fixed;
+  top:100rpx;
+  left:0;
+  width:100%;
+  height: calc(100vh - 100rpx);
+  background-color: #fff;
+  z-index: 10;
+}
+.keywordList scroll-view{
+  width:100%;
+  height:100%
+}
+

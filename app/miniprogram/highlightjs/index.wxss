@@ -1,0 +1,122 @@
+.hljs-comment,
+.hljs-quote {
+  /* white-space:pre; */
+  color: #999
+}
+
+.hljs-deletion,
+.hljs-name,
+.hljs-regexp,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-tag,
+.hljs-template-variable,
+.hljs-variable {
+  /* white-space:pre; */
+  color: #f2777a
+}
+
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-link,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-params,
+.hljs-type {
+  /* white-space:pre; */
+  color: #f99157
+}
+
+.hljs-attribute {
+  /* white-space:pre; */
+  color: #fc6
+}
+
+.hljs-addition,
+.hljs-bullet,
+.hljs-string,
+.hljs-symbol {
+  /* white-space:pre; */
+  color: #9c9
+}
+
+.hljs-section,
+.hljs-title {
+  /* white-space:pre; */
+  color: #69c
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+  /* white-space:pre; */
+  color: #c9c
+}
+
+.hljs {
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow-x: auto;
+  background: #2d2d2d;
+  color: #ccc;
+  padding: .5em
+}
+
+.hljs-emphasis {
+  font-style: italic
+}
+
+.hljs-strong {
+  font-weight: 700
+}
+
+.richText{
+  font-size: 25rpx;
+  position: relative;
+}
+.richText .container-pre{
+  position: relative;
+  min-width: auto;
+  max-width: none;
+  padding:1.5em 1em;
+  background: rgba(171, 184, 195, 1);
+}
+.richText .container-icon{
+  position: absolute;
+  top:2.5em;
+  left:2em;
+  z-index:10;
+}
+.richText .pre{
+  color: #ccc;
+  font-size: 25rpx;
+  padding:3em 1em 1em 1em;
+  background-color: #151718;
+  min-width: inherit;
+  position: relative;
+  z-index: 1;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+  overflow: auto;
+  line-height:1.4;
+  white-space:revert;
+  -webkit-overflow-scrolling: touch;
+}
+.richText .blockquote {
+  display: block!important;
+  border-left: 8px solid #d0e5f2!important;
+  padding: 5px 0.5em!important;
+  margin: 0.5em 0!important;
+  line-height: 1.6!important;
+  background-color: #f1f1f1!important;
+}
+.richText{
+  max-width: 100%!important;
+  box-sizing: border-box!important;
+  -webkit-box-sizing: border-box!important;
+  word-wrap: break-word!important;
+  word-break: normal!important;
+  word-break: break-all!important;
+  margin: 0;
+  padding: 0;
+}
