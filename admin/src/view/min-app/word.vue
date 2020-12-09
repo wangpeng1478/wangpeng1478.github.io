@@ -40,11 +40,15 @@
           <template slot-scope="{ row }" slot="name">
             <strong :title="decoding(row.translation)" v-html="highlight(decoding(row.name),search.name)"></strong>
           </template>
+          <template slot-scope="{ row }" slot="tag">
+             <Tag v-if="row.tag" color="blue">{{row.tag}}</Tag>
+             <Tag v-else color="default">无</Tag>
+          </template>
           <template slot-scope="{ row,index }" slot="explanation">
              <Button :disabled="row.explanation.length===0" @click="openExplanationModal(index)" size="small">查看</Button>
           </template>
           <template slot-scope="{ row }" slot="show">
-            <Tag v-if="row.show" color="success">显示</Tag>
+            <Tag v-if="row.show" color="green">显示</Tag>
             <Tag v-else color="default">不显示</Tag>
           </template>
           <template slot-scope="{ index }" slot="action">
@@ -96,14 +100,36 @@ export default {
           key: "name",
           slot: "name",
         },
-        
+        {
+          title: "类型",
+          slot: "tag",
+          width: 100,
+          align: "center",
+        },
         {
           title: "说明",
           slot: "explanation",
           width: 100,
           align: "center",
         },
-        
+        {
+          title: "查看人数",
+          width: 100,
+          align: "center",
+          key: "view",
+        },
+        {
+          title: "批评🙁",
+          width: 100,
+          align: "center",
+          key: "critique",
+        },
+        {
+          title: "赞赏😀",
+          width: 100,
+          align: "center",
+          key: "praise",
+        },
         {
           title: "排序",
           width: 100,

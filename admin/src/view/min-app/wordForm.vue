@@ -11,6 +11,13 @@
             placeholder="请输入单词名称"
           ></Input>
         </FormItem>
+        <FormItem label="类型" class="ivu-form-item-required">
+          <Input
+            v-model="form.tag"
+            :maxlength="200"
+            placeholder="请输入类型"
+          ></Input>
+        </FormItem>
         <FormItem label="单词翻译" class="ivu-form-item-required">
           <Input
             v-model="form.translation"
@@ -39,6 +46,15 @@
         </FormItem>
         <FormItem label="排序" class="ivu-form-item-required">
           <InputNumber v-model="form.sort" :precision="0"></InputNumber>
+        </FormItem>
+        <FormItem label="查看人数">
+          <InputNumber v-model="form.view" :precision="0"></InputNumber>
+        </FormItem>
+        <FormItem label="批评🙁">
+          <InputNumber v-model="form.critique" :precision="0"></InputNumber>
+        </FormItem>
+        <FormItem label="赞赏😀">
+          <InputNumber v-model="form.praise" :precision="0"></InputNumber>
         </FormItem>
         <FormItem label="说明">
           <Card class="explanationCard" v-for="(item,index) in form.explanation" :key="index" :padding="10" style="width:500px">
@@ -130,10 +146,14 @@ export default {
       },
       form: {
         name: "",
+        tag: "",
         translation:"",
         explanation:[],
         wordTypeId: "",
         sort:1,
+        view:0,//查看
+        critique:0,//批评
+        praise: 0,//赞
         show: true,
       },
     };
@@ -247,8 +267,8 @@ export default {
       });
     },
     Submit() {
-      const { name, wordTypeId, sort,translation } = this.form;
-      if (!name || !wordTypeId || !sort || !translation) {
+      const { name, wordTypeId, sort,translation,tag } = this.form;
+      if (!name || !wordTypeId || !sort || !translation || !tag) {
         this.$Message.warning("信息不完整");
         return;
       }
