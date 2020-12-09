@@ -41,7 +41,7 @@
             <strong :title="decoding(row.translation)" v-html="highlight(decoding(row.name),search.name)"></strong>
           </template>
           <template slot-scope="{ row }" slot="tag">
-             <Tag v-if="row.tag" color="blue">{{row.tag}}</Tag>
+             <Tag v-if="row.tag" :title="decoding(row.tag)" color="blue">{{decoding(row.tag)}}</Tag>
              <Tag v-else color="default">无</Tag>
           </template>
           <template slot-scope="{ row,index }" slot="explanation">
@@ -103,13 +103,13 @@ export default {
         {
           title: "类型",
           slot: "tag",
-          width: 100,
+          width: 140,
           align: "center",
         },
         {
           title: "说明",
           slot: "explanation",
-          width: 100,
+          width: 80,
           align: "center",
         },
         {
