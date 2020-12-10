@@ -22,9 +22,9 @@ $('.reference').each(function(){
                 name: escape($.trim(name.replace(/\(\)/g,'').replace(/New/g,''))),
                 translation: escape($.trim(translation.replace(/\。/g,'')) || "无"),
                 explanation: '[]',
-                wordTypeId: '6127fe145fc8947d00c1b5fa39992cc7',
-                tag:"音频视频",
-                sort:e+250,
+                wordTypeId: 'c89bd61c5fc89475009efe5f10117f56',
+                tag:"属性",
+                sort:e+316,
                 view:0,//查看
                 critique:0,//批评
                 praise: 0,//赞

@@ -36,18 +36,12 @@ if (dynamicRouter && dynamicRouter.length > 0) {
 store.state.app.menuList = router.options.routes
 
 router.beforeEach((to, from, next) => {
-    function isToken(s) {
-        let now = new Date();
-        let year = now.getFullYear();
-        let month = now.getMonth();
-        let date = now.getDate();
-        let str = `${year}|${month}|${date}`;
-        let K = btoa(btoa(btoa(btoa(str))))
-        return K === s
-    }
     iView.LoadingBar.start()
     const token = getToken();
-    if (!token && to.name !== LOGIN_PAGE_NAME && !isToken(token)) {
+    if(token){
+        setToken(token)
+    }
+    if (!token && to.name !== LOGIN_PAGE_NAME) {
        setToken('')
        iView.Notice.error({
           title: `${'未登录'}`
