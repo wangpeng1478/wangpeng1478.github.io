@@ -38,9 +38,6 @@ store.state.app.menuList = router.options.routes
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start()
     const token = getToken();
-    if(token){
-        setToken(token)
-    }
     if (!token && to.name !== LOGIN_PAGE_NAME) {
        setToken('')
        iView.Notice.error({
@@ -51,14 +48,17 @@ router.beforeEach((to, from, next) => {
             name: LOGIN_PAGE_NAME // 跳转到登录页
         })
     } else if (!token && to.name === LOGIN_PAGE_NAME) {
+        setToken(token)
         // 未登陆且要跳转的页面是登录页
         next() // 跳转
     } else if (token && to.name === LOGIN_PAGE_NAME) {
+        setToken(token)
         // 已登录且要跳转的页面是登录页
         next({
             name: homeName // 跳转到homeName页
         })
     } else {
+        setToken(token)
         if (store.state.user.hasGetInfo) {
             turnTo(to, store.state.user.access, next)
         } else {
