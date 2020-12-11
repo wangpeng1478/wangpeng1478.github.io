@@ -130,7 +130,7 @@ Page({
       .field({
         explanation: false
       })
-      .orderBy('sort', 'desc')
+      .orderBy('view', 'desc')
       .get().then(res => {
         if (res.errMsg === "collection.get:ok") {
           try {

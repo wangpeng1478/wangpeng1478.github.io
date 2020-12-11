@@ -8,10 +8,10 @@
   ],
   "window":{
     "navigationBarBackgroundColor": "#0081ff",
-    "backgroundColor": "#0081ff",
-    "backgroundColorTop": "#0081ff",
-    "backgroundColorBottom": "#0081ff",
-    "navigationBarTitleText": "",
+    "backgroundColor": "#f1f1f1",
+    "backgroundColorTop": "#f1f1f1",
+    "backgroundColorBottom": "#f1f1f1",
+    "navigationBarTitleText": "前端单词本",
     "navigationBarTextStyle": "white"
   },
   "plugins": {

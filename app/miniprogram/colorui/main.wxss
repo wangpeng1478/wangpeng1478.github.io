@@ -68,11 +68,12 @@ page {
 	--grayShadow: rgba(114, 130, 138, 0.2);
 	--blackShadow: rgba(26, 26, 26, 0.2);
 
-	background-color: var(--white);
-  /* background-color: var(--ghostWhite); */
+	/* background-color: var(--white); */
+  background-color: var(--ghostWhite);
 	font-size: 28rpx;
 	color: var(--tcolor);
 	font-family: Helvetica Neue, Helvetica, sans-serif;
+	min-height:100vh;
 }
 .text-main{
 	color: var(--tcolor);

@@ -18,7 +18,7 @@
                   <text class="{{names == keyword ? 'text-shadow text-red' : ''}}">{{names}}</text>
               </block>
             </view>
-            <view class="translation multi-ellipsis--l2">{{item.translation}}</view>
+            <view class="translation multi-ellipsis--l2">n. {{item.translation}}</view>
           </view>
           <view class="cell__ft" catchtap>
             <Play name="{{item.name}}"></Play>
@@ -40,7 +40,7 @@
     <view class="cell" wx:for="{{heatList}}" wx:key="index">
         <view class="cell__bd">
           <view class="name">{{item.name}}</view>
-          <view class="translation multi-ellipsis--l2">{{item.translation}}</view>
+          <view class="translation multi-ellipsis--l2">n. {{item.translation}}</view>
         </view>
         <view class="cell__ft" catchtap>
           <Play name="{{item.name}}"></Play>

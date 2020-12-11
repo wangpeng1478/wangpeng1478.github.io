@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "backgroundColor": "#0081ff",
+  "backgroundColorTop": "#0081ff",
+  "backgroundColorBottom": "#f1f1f1",
+  "usingComponents": {
+    "Play": "../../components/play"
+  }
 }

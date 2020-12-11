@@ -1,6 +1,3 @@
-page{
-  background-color: var(--ghostWhite);
-}
 .UCenter-bg {
   background-color: #17171b;
   background-image:url('https://7761-watch-aag9p-1301797871.tcb.qcloud.la/images/braun_watchfaces.gif?sign=6376772023b1be0ce57313c1e91f563f&t=1586307958');
@@ -19,8 +16,6 @@ page{
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   transition: background 1s ease-out;
 }
-
-
 .UCenter-bg text {
   opacity: 0.8;
 }

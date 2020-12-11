@@ -40,6 +40,7 @@ Component({
       if(loading){
         return;
       }
+      this.setData({loading:true})
       const name = e.currentTarget.dataset.name;
       translatePlugin.playTTS({
         text:name,
@@ -66,7 +67,8 @@ Component({
           }
         }
       }).then(res => {
-        console.log('播放成功啦', res)
+         console.log('播放成功啦', res)
+         this.setData({loading:false})
       })
     }
   }

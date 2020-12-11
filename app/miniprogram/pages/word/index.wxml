@@ -1,1 +1,91 @@
 <!-- <view>{{jt}}</view> -->
+
+<import src ="../../template/skeletonSearch/index.wxml"/>
+
+<view>
+  <view style="height:60rpx" class="bg-blue topAnimation">
+    <image
+      src="https://6164-admin-1587fb-1257868273.tcb.qcloud.la/watch/wave.gif?sign=cf077d3b0127f379aef473d7800ea0d5&t=1585804779"
+      mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view
+    class="topNav grid col-4 text-center shadow-blur bg-white margin-lr-sm padding-lr-xs padding-tb-sm">
+    <view class="item-nav solid-right">
+      <view class="item-nav-name text-center text-grey text-xs">全部</view>
+      <view class="item-nav-value text-bold">200</view>
+    </view>
+    <view class="item-nav solid-right">
+      <view class="item-nav-name text-center text-grey text-xs">记忆中</view>
+      <view class="item-nav-value text-bold">23</view>
+    </view>
+    <view class="item-nav solid-right">
+      <view class="item-nav-name text-center text-grey text-xs">陌生词</view>
+      <view class="item-nav-value text-bold">188</view>
+    </view>
+    <view class="item-nav">
+      <view class="item-nav-name text-center text-grey text-xs">已掌握</view>
+      <view class="item-nav-value text-bold">12</view>
+    </view>
+  </view>
+  <view class="swiper-view bg-white shadow-blur padding-tb-sm">
+    <view class="flex padding-tb-sm padding-lr justify-between align-center">
+      <view class="flex-sub text-lg text-bold">我的学习<text class="dot text-sm text-grey margin-left-sm">{{cardCur+1}}/{{typeList.length}}</text></view>
+      <view class="text-shadow text-blue">全部</view>
+    </view>
+    <swiper style="height:280rpx !important;" class="card-swiper" indicator-dots="{{false}}" circular="true" interval="5000" duration="500" bindchange="cardSwiper">
+      <swiper-item wx:for="{{typeList}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+        <view class="swiper-item" style="background-image:{{item.linear?item.linear:'linear-gradient(45deg, #00aaff, #33bbff)'}}">
+          <view class="swiper-item-li flex justify-between align-center">
+            <view class="item-image">
+              <image mode="aspectFit" src="{{item.icon}}"></image>
+            </view>
+            <view class="flex-sub item-content text-right padding-lr-lg">
+              <view class="item-name margin-bottom-sm text-lg text-shadow text-white text-bold">{{item.name}}</view>
+              <view class="item-progress margin-bottom-xs">
+                <view class="item-progress-text text-xs text-white">学习进度：<text class="text-sm">40/100</text></view>
+                <view class="cu-progress">
+                  <view class="bg-yellow" style="width:61.8%;"></view>
+                </view>
+              </view>
+              <view class="item-button">
+                <button class="cu-btn round text-shadow text-blue">继续学习</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <view class="view-ranking bg-white shadow-blur padding-tb-sm">
+    <view class="flex padding-tb-sm padding-lr justify-between align-center solid-bottom">
+      <view class="flex-sub text-lg text-bold">排行</view>
+      <view class="showSort text-shadow text-blue text-xxl" bindtap="showSort">
+        <text class="cuIcon-sort"></text>
+      </view>
+    </view>
+    <template wx:if="{{heatLoading}}" is="skeletonSearch"/>
+    <view class="cells" wx:if="{{heatList.length>0}}">
+      <view class="cell" wx:for="{{heatList}}" wx:key="index">
+          <view class="cell__bd">
+            <view class="name">{{item.name}}</view>
+            <view class="translation multi-ellipsis--l2">n. {{item.translation}}</view>
+            <view class="cell-iconlist text-gray text-sm">
+                <text class="item-cuIcon">
+                  <text class="cuIcon-attentionfill"></text> {{item.view||0}}
+                </text>
+                <text class="item-cuIcon">
+                  <text class="cuIcon-usefullfill"></text> {{item.praise||0}}
+                </text>
+                <text class="item-cuIcon">
+                  <text class="cuIcon-usefullfill" style="display:inline-block;transform:rotateX(180deg) translateY(3rpx)"></text> {{item.critique||0}}
+                </text>
+            </view>
+          </view>
+          <view class="cell__ft" catchtap>
+            <Play name="{{item.name}}"></Play>
+          </view>
+      </view>
+    </view>
+  </view>
+</view>
