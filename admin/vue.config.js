@@ -14,7 +14,7 @@ const resolve = dir => {
 const BASE_URL = process.env.NODE_ENV === 'production'
   ? './'
   : '/'
-
+console.log(process.env);
 module.exports = {
   // Project deployment base
   // By default we assume your app will be deployed at the root of a domain,

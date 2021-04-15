@@ -6,3 +6,13 @@
     <view style="margin-top:1em;padding: 0 1em;color:#969799;font-size:28rpx;">没有找到 <text>{{keyword}}</text></view>
   </view>
 </template>
+
+
+<template name="historyEmpty">
+  <view style="display: flex;flex-direction: column;align-items: center;justify-content: center;padding: 2em 0;">
+    <view>
+      <image style="width:30vw" mode="widthFix" src="cloud://jy-9g3ldpcae419218f.6a79-jy-9g3ldpcae419218f-1304269118/img/historyEmpty.svg"></image>
+    </view>
+    <view style="margin-top:1em;padding: 0 1em;color:#969799;font-size:28rpx;">#你还没有搜索记录#</view>
+  </view>
+</template>

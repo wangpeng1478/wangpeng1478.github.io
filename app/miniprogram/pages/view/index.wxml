@@ -1,0 +1,36 @@
+<view>
+
+  <view class="cu-card">
+    <view class="cu-card-item" style="padding:20rpx 30rpx">
+      <view class="cu-list menu">
+        <view class="cu-item" style="padding:0">
+          <view class="content">
+            <text class="text-bold text-xl">{{info.name}}</text>
+          </view>
+          <view class="action">
+            <view class="favor">
+              <view class="cuIcon-favor lg text-blue"></view>
+            </view>
+            <view class="favor">
+              <view class="cuIcon-favorfill lg text-blue"></view>
+            </view>
+            <view class="play">
+              <Play name="{{info.name}}"></Play>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="text-grey text-sm padding-bottom-xs">n.{{info.translation}}</view>
+    </view>
+  </view>
+
+  <view class="cu-card" wx:for="{{info.explanation}}" wx:key="index">
+    <view class="cu-card-item" style="padding:20rpx 30rpx">
+      <view class="rich-text-title">{{item.title}}</view>
+      <view class="rich-text-body">
+        <rich-text class="richText" nodes="{{item.desc}}"></rich-text>
+      </view>
+    </view>
+  </view>
+  
+</view>

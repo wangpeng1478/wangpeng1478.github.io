@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="format-detection" content="telephone=no">
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.1/theme-chalk/index.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.2/vue-resource.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.1/index.min.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .richText {
+            max-height: 230px;
+            overflow: auto;
+        }
+        
+        .richText,
+        .richText * {
+            max-width: 100%!important;
+            box-sizing: border-box!important;
+            -webkit-box-sizing: border-box!important;
+            word-wrap: break-word!important;
+            word-break: normal!important;
+            word-break: break-all!important;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app">
+        <el-dialog :title="form.i+''?'编辑题目':'新增题目'" :visible.sync="dialogFormVisible">
+            <el-form :model="form">
+                <el-form-item label="题目" :label-width="formLabelWidth">
+                    <el-input v-model="form.n" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入题目"></el-input>
+                </el-form-item>
+                <el-form-item label="类型" :label-width="formLabelWidth">
+                    <el-select v-model="form.t" placeholder="请选择类型">
+                        <el-option v-for="(item,index) in filters" :key="index" :label="item.text" :value="item.value"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="答案" :label-width="formLabelWidth" v-if="form.t==='判断'&&form.i+''">
+                    <el-select v-model="form.a" placeholder="请选择答案">
+                        <el-option label="未知" value="">未知</el-option>
+                        <el-option label="对" value="对">对</el-option>
+                        <el-option label="错" value="错"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="答案" :label-width="formLabelWidth" v-else>
+                    <el-input v-model="form.a" type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入答案"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click.prevent="onSubmit" :loading="formLoading">确 定</el-button>
+            </div>
+        </el-dialog>
+        <!-- Form -->
+        <el-table v-loading="tableLoading" :data="list" :height="tableHeight">
+            <el-table-column type="index" width="50"></el-table-column>
+            <el-table-column label="类型" width="100" :filters="filters" :filter-method="filterTag" filter-placement="bottom-end">
+                <template slot-scope="scope">
+                    <el-tag v-if="decodeURIComponent(scope.row.t||'[未知]')==='单选'">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='多选'" type="success">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='判断'" type="warning">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='填空'" type="danger">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='回答'" type="info">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='匹配'" effect="dark">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                    <el-tag v-else-if="decodeURIComponent(scope.row.t||'[未知]')==='[未知]'" type="info" effect="dark">{{ decodeURIComponent(scope.row.t||'[未知]') }}</el-tag>
+                </template>
+            </el-table-column>
+            <el-table-column label="题目名称">
+                <template slot="header" slot-scope="scope">
+                    <span>题目名称 <span style="color:#f56c6c;">({{list.length}})</span></span>
+                </template>
+                <template slot-scope="scope">
+                 <div class="richText">{{ repairPerRestore(decodeURIComponent(scope.row.n||'')) }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="答案">
+                <template slot-scope="scope">
+                 <div class="richText">{{ repairPerRestore(decodeURIComponent(scope.row.a||'')) }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="100">
+                <template slot="header" slot-scope="scope">
+                    <el-button @click="openDialogFormVisible" type="primary" type="text" size="small">新增</el-button>
+                </template>
+                <template slot-scope="scope">
+                    <el-button @click.prevent="openDialogFormVisible(scope)" type="text" size="small">编辑</el-button>
+                    <el-button @click.prevent="deletes(scope.row)" type="text" size="small">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+    <script>
+        var vue = new Vue({
+                el: '#app',
+                data: {
+                    name: "",
+                    list: [],
+                    formLoading: false,
+                    tableHeight: window.innerHeight,
+                    tableLoading: true,
+                    filters: [{
+                        text: '未知',
+                        value: ''
+                    }, {
+                        text: '单选',
+                        value: '单选'
+                    }, {
+                        text: '多选',
+                        value: '多选'
+                    }, {
+                        text: '判断',
+                        value: '判断'
+                    }, {
+                        text: '填空',
+                        value: '填空'
+                    }, {
+                        text: '回答',
+                        value: '回答'
+                    }, {
+                        text: '匹配',
+                        value: '匹配'
+                    }, ],
+                    dialogFormVisible: false,
+                    formLabelWidth: '120px',
+                    form: {
+                        n: "",
+                        a: "",
+                        t: window.localStorage.getItem('formType') || '',
+                        i: ""
+                    }
+                },
+                mounted() {
+                    this.getList();
+                },
+                methods: {
+                    formTypeChange() {
+                        window.localStorage.setItem('formType', this.form.t || '');
+                    },
+                    repairPerRestore(str) {
+                        if (str) {
+                            str = str.replace(/\[0\/0\]/ig, '%'); //删除开头0-9+.
+                            return str
+                        };
+                        return ""
+                    },
+                    getList() {
+                        this.tableLoading = true;
+                        this.$http.get('/getList').then(res => {
+                            this.tableLoading = false;
+                            if (res.statusText == "OK" && res.body && res.body.code === "ok") {
+                                this.list = res.body.result || [];
+                            } else {
+                                this.$message.error(`${res.statusText}-${res.body.msg}`)
+                            }
+                        }, (err) => {
+                            this.tableLoading = false;
+                            console.log(err);
+                        });
+                    },
+                    onSubmit() {
+                        const data = this.form;
+                        if (data.n && data.a && data.t) {
+                            this.formLoading = true;
+                            this.$http.post('/add', data, {
+                                emulateJSON: true
+                            }).then(res => {
+                                this.formLoading = false;
+                                if (res.statusText == "OK" && res.body && res.body.code === "ok") {
+                                    this.getList();
+                                    this.form.i = "";
+                                    this.form.n = "";
+                                    this.form.a = "";
+                                    this.$message({
+                                        message: '提交成功！',
+                                        type: 'success'
+                                    });
+                                    this.dialogFormVisible = false;
+
+                                } else {
+                                    this.$message.error(`${res.statusText}-${res.body.msg}`)
+                                }
+
+                            }, (err) => {
+                                this.formLoading = false;
+                                console.log(err);
+                            });
+                        } else {
+                            this.$message({
+                                message: '数据不全',
+                                type: 'warning'
+                            });
+                        }
+
+                    },
+                    openDialogFormVisible(scope) {
+                        const object = scope.row || {};
+                        if (object.n && object.a && object.t) {
+                            for (const key in object) {
+                                if (Object.hasOwnProperty.call(object, key)) {
+                                    const element = object[key];
+                                    object[key] = decodeURIComponent(element || '');
+                                }
+                            }
+                            this.form = object;
+                            this.form.i = scope.$index;
+                        } else {
+                            this.form.i = "";
+                            this.form.n = "";
+                            this.form.a = "";
+                        }
+                        this.dialogFormVisible = true;
+                    },
+                    filterTag(value, row) {
+                        return decodeURIComponent(row.t) === decodeURIComponent(value);
+                    },
+                    deletes(object) {
+                        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            const loading = this.$loading({
+                                lock: true,
+                                text: 'Loading',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
+                            const n = object.n;
+                            if (n) {
+                                this.$http.post('/delete', {
+                                    n
+                                }, {
+                                    emulateJSON: true
+                                }).then(res => {
+                                    loading.close();
+                                    if (res.statusText == "OK" && res.body && res.body.code === "ok") {
+                                        this.getList();
+                                        this.form.i = "";
+                                        this.form.n = "";
+                                        this.form.a = "";
+                                        this.$message({
+                                            message: '删除成功！',
+                                            type: 'success'
+                                        });
+
+                                    } else {
+                                        this.$message.error(`${res.statusText}-${res.body.msg}`)
+                                    }
+
+                                }, (err) => {
+                                    loading.close();
+                                    console.log(err);
+                                });
+                            } else {
+                                console.log(n);
+                                this.$message.error('删除失败')
+                            }
+                        }).catch(() => {
+
+                        });
+                    },
+                }
+            })
+            // --------------------------------------------------
+    </script>
+</body>
+
+</html>

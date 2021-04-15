@@ -1,0 +1,28 @@
+
+.cu-card{
+  margin-bottom: 1em;
+}
+.cu-card-item{
+  display: block;
+  background-color: var(--white);
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin: 15rpx;
+  padding:20rpx;
+}
+
+.favor{
+  padding:21rpx;
+  text-align: center;
+}
+.play,.favor{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rich-text-title{
+  font-size: 35rpx;
+  padding: 20rpx 0;
+  font-weight: bold;
+  margin-bottom:10rpx;
+}

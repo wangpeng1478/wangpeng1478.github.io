@@ -3,31 +3,12 @@
 <import src ="../../template/skeletonSearch/index.wxml"/>
 
 <view>
-  <view style="height:60rpx" class="bg-blue topAnimation">
+  <view style="height:40rpx" class="bg-blue topAnimation">
     <image
       src="https://6164-admin-1587fb-1257868273.tcb.qcloud.la/watch/wave.gif?sign=cf077d3b0127f379aef473d7800ea0d5&t=1585804779"
       mode="scaleToFill" class="gif-wave"></image>
   </view>
-  <view
-    class="topNav grid col-4 text-center shadow-blur bg-white margin-lr-sm padding-lr-xs padding-tb-sm">
-    <view class="item-nav solid-right">
-      <view class="item-nav-name text-center text-grey text-xs">全部</view>
-      <view class="item-nav-value text-bold">200</view>
-    </view>
-    <view class="item-nav solid-right">
-      <view class="item-nav-name text-center text-grey text-xs">记忆中</view>
-      <view class="item-nav-value text-bold">23</view>
-    </view>
-    <view class="item-nav solid-right">
-      <view class="item-nav-name text-center text-grey text-xs">陌生词</view>
-      <view class="item-nav-value text-bold">188</view>
-    </view>
-    <view class="item-nav">
-      <view class="item-nav-name text-center text-grey text-xs">已掌握</view>
-      <view class="item-nav-value text-bold">12</view>
-    </view>
-  </view>
-  <view class="swiper-view bg-white shadow-blur padding-tb-sm">
+  <view class="swiper-view bg-white shadow-blur padding-tb-sm" style="margin-top:-5rpx;border-radius:0 0 25rpx 25rpx">
     <view class="flex padding-tb-sm padding-lr justify-between align-center">
       <view class="flex-sub text-lg text-bold">我的学习<text class="dot text-sm text-grey margin-left-sm">{{cardCur+1}}/{{typeList.length}}</text></view>
       <view class="text-shadow text-blue">全部</view>
@@ -66,7 +47,7 @@
     </view>
     <template wx:if="{{heatLoading}}" is="skeletonSearch"/>
     <view class="cells" wx:if="{{heatList.length>0}}">
-      <view class="cell" wx:for="{{heatList}}" wx:key="index">
+      <view class="cell" wx:for="{{heatList}}" wx:key="index" data-id="{{item._id}}" bindtap="goview">
           <view class="cell__bd">
             <view class="name">{{item.name}}</view>
             <view class="translation multi-ellipsis--l2">n. {{item.translation}}</view>

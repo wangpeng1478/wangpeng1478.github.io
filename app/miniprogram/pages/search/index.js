@@ -55,7 +55,7 @@ Page({
     })
   },
   cancel(){
-    // wx.vibrateShort();
+    wx.vibrateShort();
     this.setData({
       keyword:"",
       keywordShow:false,
@@ -125,42 +125,18 @@ Page({
 
   },
   getHeat() {
-    const db = wx.cloud.database();
-    db.collection('word')
-      .field({
-        explanation: false
+    this.setData({
+      heatList:[],
+      heatLoading: false
+    })
+  },
+  goview(e){
+    let id = e.currentTarget.dataset.id;
+    if(id){
+      wx.navigateTo({
+        url:`/pages/view/index?id=${id}`
       })
-      .orderBy('view', 'desc')
-      .get().then(res => {
-        if (res.errMsg === "collection.get:ok") {
-          try {
-            let data = res.data || [];
-            let list = [];
-            data.forEach((element, index) => {
-              element.name = unescape(element.name);
-              element.translation = unescape(element.translation);
-              list.push(element);
-            });
-            console.log(list);
-            this.setData({
-              heatList: list,
-              heatLoading: false
-            })
-          } catch (error) {
-            wx.vibrateShort();
-            console.log(error);
-            this.setData({
-              heatLoading: false
-            });
-          }
-        }
-      }).catch(err => {
-        wx.vibrateShort();
-        console.log(err);
-        this.setData({
-          heatLoading: false
-        });
-      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

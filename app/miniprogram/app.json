@@ -4,9 +4,10 @@
     "pages/search/index",
     "pages/sysType/index",
     "pages/about/index",
-    "pages/introduction/index"
+    "pages/introduction/index",
+    "pages/view/index"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#0081ff",
     "backgroundColor": "#f1f1f1",
     "backgroundColorTop": "#f1f1f1",

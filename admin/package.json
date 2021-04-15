@@ -6,6 +6,7 @@
   "homepage": "https://BuNuo.github.io/iview-admin-simple",
   "scripts": {
     "dev": "vue-cli-service serve --open",
+    "devtest": "vue-cli-service serve --open --test999999999",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",

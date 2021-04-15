@@ -11,7 +11,7 @@
   <scroll-view scroll-y>
     <template wx:if="{{loading}}" is="skeletonSearch"/>
     <view class="cells" wx:if="{{keywordList.length>0}}">
-      <view class="cell" wx:for="{{keywordList}}" wx:key="index">
+      <view class="cell" wx:for="{{keywordList}}" wx:key="index" data-id="{{item._id}}" bindtap="goview">
           <view class="cell__bd">
             <view class="name">
               <block wx:for="{{item.nameArr}}" wx:for-item="names"  wx:for-index="idx" wx:key="idx">
@@ -31,7 +31,7 @@
 <view class="cu-bar solid-bottom bg-white">
    <view class="action">
       <text class="cuIcon-title text-shadow text-blue"></text>
-			<text class="text-lg text-shadow">搜索趋势</text>
+			<text class="text-lg text-shadow">搜索记录</text>
    </view>
 </view>
 <scroll-view class="bg-white heat" scroll-y>
@@ -47,4 +47,5 @@
         </view>
     </view>
   </view>
+  <template wx:if="{{heatList.length===0&&!heatLoading}}" is="historyEmpty" />
 </scroll-view>

@@ -31,6 +31,14 @@ Page({
       })
     }
   },
+  goview(e){
+    let id = e.currentTarget.dataset.id;
+    if(id){
+      wx.navigateTo({
+        url:`/pages/view/index?id=${id}`
+      })
+    }
+  },
   cardSwiper(e) {
     this.setData({
       cardCur: e.detail.current
@@ -115,6 +123,9 @@ Page({
     this.setData({ heatLoading: true});
     const db = wx.cloud.database();
     db.collection('word')
+      .where({
+        show: true
+      })
       .field({
         explanation: false
       })

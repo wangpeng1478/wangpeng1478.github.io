@@ -80,6 +80,8 @@
   max-width: none;
   padding:1.5em 1em;
   background: rgba(171, 184, 195, 1);
+  border-radius:10rpx;
+  margin-bottom: 0.7em;
 }
 .richText .container-icon{
   position: absolute;
@@ -96,17 +98,18 @@
   position: relative;
   z-index: 1;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+  box-shadow: rgba(0, 0, 0, 0.55) 0px 10rpx 20rpx;
   overflow: auto;
   line-height:1.4;
   white-space:revert;
   -webkit-overflow-scrolling: touch;
 }
+
 .richText .blockquote {
   display: block!important;
   border-left: 8px solid #d0e5f2!important;
   padding: 5px 0.5em!important;
-  margin: 0.5em 0!important;
+  margin: 0.6em 0!important;
   line-height: 1.6!important;
   background-color: #f1f1f1!important;
 }
@@ -119,4 +122,15 @@
   word-break: break-all!important;
   margin: 0;
   padding: 0;
+}
+
+.table, .th , .td  {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  padding: 10rpx;
+}
+
+.table .th{
+  background-color: #e8e8e8 !important;
+  text-align: left;
 }

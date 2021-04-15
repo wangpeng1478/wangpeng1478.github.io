@@ -18,20 +18,19 @@
 				<text class="text-grey">我的收藏</text>
 			</navigator>
 		</view>
+
 		<view class="cu-item arrow">
 			<navigator class="content" url="/pages/introduction/index?type=about" hover-class="none">
 				<text class="cuIcon-formfill text-green"></text>
 				<text class="text-grey">关于表盘壁纸</text>
 			</navigator>
 		</view>
-
 		<view class="cu-item arrow">
 			<view class="content" bindtap="gopay">
 				<text class="cuIcon-redpacket text-red"></text>
 				<text class="text-grey">赞赏支持</text>
 			</view>
 		</view>
-
 		<view class="cu-item arrow">
 			<navigator class="content" url="/pages/introduction/index?type=privacy" hover-class="none">
 				<text class="cuIcon-read  text-mauve"></text>

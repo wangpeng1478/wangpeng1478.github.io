@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "Play": "../../components/play"
+  }
+}
