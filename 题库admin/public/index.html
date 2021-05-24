@@ -21,7 +21,8 @@
         }
         
         .richText {
-            max-height: 230px;
+            height:auto;
+            max-height:230px;
             overflow: auto;
         }
         
@@ -91,16 +92,16 @@
             </el-table-column>
             <el-table-column label="答案">
                 <template slot-scope="scope">
-                 <div class="richText">{{ repairPerRestore(decodeURIComponent(scope.row.a||'')) }}</div>
+                 <div class="richText" v-html="repairPerRestore(decodeURIComponent(scope.row.a||''))"></div>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="100">
+            <el-table-column label="操作" width="140">
                 <template slot="header" slot-scope="scope">
                     <el-button @click="openDialogFormVisible" type="primary" type="text" size="small">新增</el-button>
                 </template>
                 <template slot-scope="scope">
-                    <el-button @click.prevent="openDialogFormVisible(scope)" type="text" size="small">编辑</el-button>
-                    <el-button @click.prevent="deletes(scope.row)" type="text" size="small">删除</el-button>
+                    <el-button :loading="butLoading" @click.prevent="openDialogFormVisible(scope)" type="text" size="small">编辑</el-button>
+                    <el-button :loading="butLoading" @click.prevent="deletes(scope.row)" type="text" size="small">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -114,6 +115,7 @@
                     formLoading: false,
                     tableHeight: window.innerHeight,
                     tableLoading: true,
+                    butLoading: false,
                     filters: [{
                         text: '未知',
                         value: ''
@@ -152,6 +154,11 @@
                     formTypeChange() {
                         window.localStorage.setItem('formType', this.form.t || '');
                     },
+                    /**
+                     * @description: 
+                     * @param {*} str
+                     * @return {*}
+                     */
                     repairPerRestore(str) {
                         if (str) {
                             str = str.replace(/\[0\/0\]/ig, '%'); //删除开头0-9+.
@@ -209,6 +216,7 @@
 
                     },
                     openDialogFormVisible(scope) {
+                        this.butLoading = true;
                         const object = scope.row || {};
                         if (object.n && object.a && object.t) {
                             for (const key in object) {
@@ -225,6 +233,9 @@
                             this.form.a = "";
                         }
                         this.dialogFormVisible = true;
+                        this.$nextTick(() => {
+                            this.butLoading = false;
+                        })
                     },
                     filterTag(value, row) {
                         return decodeURIComponent(row.t) === decodeURIComponent(value);
@@ -278,6 +289,24 @@
                 }
             })
             // --------------------------------------------------
+        /**
+         * @description: 
+         * @param {*} str
+         * @return {*}
+         */
+        function dealStr(str) {
+            if (str) {
+                str = str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, ""); //删除emoji
+                str = str.replace(/^\s+|\s+$/g, ""); //去除两头空格
+                str = str.replace(/(。$)/g, ""); //删除最后一个【。】
+                str = str.replace(/^[A-Z]\./ig, ''); //删除开头A-Z+.
+                str = str.replace(/^[0-9]+\./ig, ''); //删除开头0-9+.
+                str = str.replace(/^\s+|\s+$/g, ""); //去除两头空格
+                return str
+            }
+            return ""
+        };
+        
     </script>
 </body>
 

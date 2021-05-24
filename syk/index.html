@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/skin.css">
+    <script src="js/vue.min.js"></script>
+    <script src="js/vant.min.js"></script>
+    <script src="js/vue-photo-preview.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            color: #657180;
+        }
+        
+        .textMosaic {
+            filter: blur(5px);
+            user-select: none;
+            pointer-events: none;
+        }
+        
+        .view {
+            width: 96%;
+            margin: auto;
+        }
+        
+        .pswp {
+            opacity: 0.9;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        
+        .van-overlay {
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        
+        .app {
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #fff;
+        }
+        
+        @media screen and (min-width: 600px) {
+            body {
+                background-color: #f9f9f9;
+            }
+        }
+        
+        .banner {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .banner img {
+            display: block;
+            width: 100%;
+        }
+        
+        .recodeWrap {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            align-content: center;
+            margin: 1em auto;
+            background: linear-gradient(180deg, rgba(0, 79, 255, 1) 0%, rgba(0, 124, 239, 1) 48%, rgba(5, 172, 255, 1) 100%);
+            border-radius: 10px;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recodeWrap .van-cell-group,
+        .recodeWrap .van-cell,
+        .recodeWrap .van-cell__value {
+            background-color: transparent;
+            color: #e0e0e0;
+            font-size: 12px;
+        }
+        
+        .recodeWrap .van-cell::after,
+        .recodeWrap .van-hairline--top-bottom::after {
+            display: none;
+        }
+        
+        .recodeWrap .van-cell__title {
+            -webkit-box-flex: unset;
+            -webkit-flex: unset;
+            flex: unset;
+            width: 6em;
+        }
+        
+        .recodeWrap .van-cell__value {
+            text-align: left;
+        }
+        
+        .recodeWrap .van-cell {
+            line-height: 1;
+            padding: 5px 0;
+        }
+        
+        .recodeWrap .info {
+            padding: 0 16px;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        
+        .recodeWrap .levelImgWrap {
+            padding: 0 15px;
+        }
+        
+        .recodeWrap .infoTitle {
+            color: #fff;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+        
+        .recodeWrap .levelImgWrap .sbtn {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgb(255 255 255);
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            display: block;
+            /* margin-bottom: 20px; */
+        }
+        
+        .parameterPopup {
+            overflow: hidden;
+        }
+        
+        .parameterPopup .popup-title {
+            padding: 16px 10px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+        }
+        
+        .parameterPopup .popup-body {
+            height: calc(100% - 53px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 53px;
+        }
+        
+        .view-item-title {
+            position: relative;
+            border-bottom: 2px solid #004fff;
+            margin: 2em 0 0.5em 0;
+        }
+        
+        .view-item-title .view-item-title-name {
+            display: inline-block;
+            padding: 5px 50px 5px 8px;
+            background-color: #004fff;
+            color: #fff;
+            text-align: center;
+            font-size: 15px;
+            -webkit-clip-path: polygon(0 1%, 80% 0, 100% 100%, 0% 100%);
+            clip-path: polygon(0 1%, 80% 0, 100% 100%, 0% 100%);
+            margin-bottom: -2px;
+            font-weight: 600;
+        }
+        
+        .certificateView .certificateView-box {
+            box-shadow: 0px 0 10px 0 rgb(0 0 0 / 23%);
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #f3f3f3;
+            margin: 5px;
+            text-align: center;
+        }
+        
+        .certificateView:nth-child(odd) .certificateView-box {
+            margin-left: 0;
+        }
+        
+        .certificateView:nth-child(even) .certificateView-box {
+            margin-right: 0;
+        }
+        
+        .certificateView .certificateView-box .bgItem-title {
+            font-size: 13px;
+            margin: 5px 0;
+        }
+        
+        .company-info {
+            font-size: 13px;
+            text-indent: 2em;
+            line-height: 1.7;
+            padding: 10px 0;
+        }
+        
+        
+        
+        .InsurancePolicy {
+            position: relative;
+        }
+        
+        .InsurancePolicy .InsurancePolicybg {
+            display: block;
+            width: 100%;
+            user-select: none;
+            pointer-events: none;
+        }
+        
+        .InsurancePolicy .InsurancePolicy-body {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        
+        .InsurancePolicy-body-padding {
+            padding: 27% 14% 20%;
+        }
+        
+        .InsurancePolicy-body-padding h2 {
+            text-align: center;
+            font-size: 20px;
+            font-family: serif;
+        }
+        
+        .InsurancePolicyTable {
+            width: 100%;
+            margin: 30px 0;
+            border: 2px solid #9a9a9a;
+            border-collapse: collapse;
+            padding: 5px;
+            font-size: 12px;
+        }
+        
+        .InsurancePolicyTable th,
+        .InsurancePolicyTable td {
+            border: 1px solid #dedede;
+            border-collapse: collapse;
+            padding: 5px;
+            font-size: 12px;
+        }
+        .InsurancePolicytime{
+            text-align: right;
+            position: relative;
+            font-size: 13px;
+        }
+        .InsurancePolicytime img{
+            position: absolute;
+            width: 100px;
+            top: -50px;
+            right: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+        .graphicIntroductionView{
+            position: relative;
+            overflow: hidden;
+        }
+        .lookMoreHide{
+            display: block;
+            text-align: center;
+            padding: 1em;
+            color: #004fff;
+        }
+        .lookMore {
+            display: block;
+            text-align: center;
+            padding: 1em;
+            color: #004fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            background: linear-gradient(to top, white , rgb(255 255 255 / 34%));
+        }
+        .evaluationTag{
+            margin-top:1em;
+        }
+        .evaluationTag .van-tag{
+            margin:0 10px 5px 0;
+            background-color: transparent;
+            border: 1px solid #ee0a24;
+            color: #ee0a24;
+            padding: 3px 7px;
+        }
+        .evaluation{
+            margin-top:1em;
+        }
+        .evaluation-item{
+            border-top: 1px solid #e5e5e5;
+            padding: 15px 0;
+            margin: 0 10px;
+            color: #999;
+        }
+        .evaluation-userInfo{
+            font-size:12px;
+            margin-bottom: 5px;
+        }
+        .evaluation-content{
+            font-size: 13px;
+            color: #051b28;
+            padding:5px 0;
+        }
+        .evaluation-sku{
+            font-size:12px;
+            margin-top: 5px;
+        }
+        .evaluation-sku span{
+            margin-right:1em;
+        }
+        .stepsView h3{
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .stepsView p{
+            font-size: 12px;
+        }
+        .phone400{
+            margin-top: 40px;
+            text-align: center;
+            padding: 1em;
+            border-top: 2px solid #e2e2e2;
+        }
+        .videoView{
+            width:100%;
+        }
+        .commentFixed{
+            position: fixed;
+            display: block;
+            width: 50px;
+            text-align: center;
+            background: rgb(0 79 255 / 90%);
+            z-index: 20;
+            bottom: 2em;
+            right: 2em;
+            border-radius: 10px;
+            color: #fff;
+            padding: 8px 0;
+            line-height: 13px;
+            cursor: pointer;
+        }
+        .commentFixed i{
+            font-size:20px;
+        }
+        .commentFixed p{
+            font-size:12px;
+        }
+        .commentShow h2{
+            text-align: center;
+            font-size: 19px;
+            padding: 14px 0;
+            border-bottom: 2px solid #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" :style="{opacity:loadShow?1:0}" style="opacity:0;" class="app">
+        <section class="recodeWrap view">
+            <section class="info">
+                <h1 class="infoTitle">优品质溯源卡</h1>
+                <van-cell-group>
+                    <template v-for="(item, index) in goods.parameter">
+                        <van-cell v-if="index<4" :title="item.key+'：'" :value="item.value" :key="index"></van-cell>
+                    </template>
+                </van-cell-group>
+            </section>
+            <section class="levelImgWrap" v-if="goods.parameter.length>4">
+                <a @click="parameterPopupShow=true" href="javascript:;" class="sbtn">详情</a>
+            </section>
+        </section>
+        <van-popup class="parameterPopup" v-model="parameterPopupShow" position="bottom" :style="{ height: '70vh' }" get-container="#app" closeable round>
+            <div class="popup-title">详细信息</div>
+            <div class="popup-body">
+                <van-cell-group>
+                    <template v-for="(item, index) in goods.parameter">
+                        <van-cell :title="item.key" :value="item.value" :key="index"></van-cell>
+                    </template>
+                </van-cell-group>
+            </div>
+        </van-popup>
+
+
+        <!-- 顶部Banner -->
+        <!-- <van-swipe class="banner view" :autoplay="5000">
+            <van-swipe-item v-for="(img, index) in goods.banner" :key="index">
+                <img preview="1" :src="img" />
+            </van-swipe-item>
+        </van-swipe> -->
+        <!-- 顶部Banner-->
+
+
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">资质证书</div>
+            </div>
+            <div class="view-body">
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.certificate">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box">
+                                <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">电子保险单</div>
+            </div>
+            <div class="view-body">
+                <div class="InsurancePolicy">
+                    <img src="img/psd20514.jpg" class="InsurancePolicybg" width="100%" />
+                    <div class="InsurancePolicy-body">
+                        <div class="InsurancePolicy-body-padding">
+                            <h2>电子保险单</h2>
+                            <table class="InsurancePolicyTable">
+                                <tr>
+                                    <td colspan="4">保单编号：RB20215241416300614</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">投保人：<span class="textMosaic">苏州优品联盟质量</span>信息技术有限公司</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">被保人：持有<b>优品质溯源卡</b>的消费者</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <b>保障内容</b><br /> 如您发现产品出现问题，系统审核通过以后，按照保险公司理赔标准进行赔付。
+                                        <b>优品质溯源卡</b>丢失，涂改，刮开保安区暂不支持理赔。
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <b>生效时间</b><br /> 卖家收到
+                                        <b>优品质溯源卡</b>时 保单自动生效！
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="InsurancePolicytime">
+                                签单日期：2020年3月24日
+                                <img :src="createSeal('中国人民财产保险股份有限公司', '保险专用章')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">工厂信息</div>
+            </div>
+            <div class="view-body">
+                <div class="company-info" v-html="goods.company.info"></div>
+                <!-- 视频 -->
+                <video class="videoView" src="viedo/1.mp4" poster="viedo/1.png" preload controls x5-playsinline="" playsinline="" webkit-playsinline="true"
+                controlslist="nodownload nofullscreen noremoteplayback" preload="none"></video>
+                <!-- 视频 -->
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.company.img">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box"> 
+                                <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">原材料</div>
+            </div>
+            <div class="view-body">
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.rawMaterials.img">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box"> 
+                                <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
+
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">图文介绍</div>
+            </div>
+            <div class="view-body graphicIntroductionView" :style="{height:autoHeight}">
+                <!-- 视频 -->
+                <video class="videoView" src="viedo/1.mp4" poster="viedo/2.png" preload controls x5-playsinline="" playsinline="" webkit-playsinline="true"
+                controlslist="nodownload nofullscreen noremoteplayback" preload="none"></video>
+                <!-- 视频 -->
+                <img v-for="index in 8" :src="'img/graphicIntroduction/'+index+'.gif'" width="100%" style="display:block;line-height:0;">
+                <a v-if="autoHeight!='auto'" class="lookMore" @click.prevent="autoHeight='auto'">查看更多</a>
+                <a v-else class="lookMoreHide" @click.prevent="autoHeight='700px'">收缩</a>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">热门评价</div>
+            </div>
+            <div class="view-body">
+                <div class="evaluationTag">
+                    <van-tag v-for="(tagItem, tagIndex) in goods.evaluationTag" :key="tagIndex" type="danger">{{tagItem}}</van-tag>
+                </div>
+                <div class="evaluation">
+
+                    <div class="evaluation-item" v-for="(evaluationItem, evaluationIndex) in goods.evaluationList" :key="evaluationIndex">
+                        <div class="evaluation-userInfo">
+                            <span>{{evaluationItem.userName}}</span>
+                            <span style="float: right;">{{evaluationItem.time}}</span>
+                        </div>
+                        <div class="evaluation-content">{{evaluationItem.content}}</div>
+                        <div class="evaluation-sku">
+                            <span>颜色：{{evaluationItem.color}}</span>
+                            <span>尺码：{{evaluationItem.size}}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">产品溯源</div>
+            </div>
+            <div class="view-body">
+                <van-steps direction="vertical" :active="0" active-color="#004fff" class="stepsView">
+                    <van-step>
+                      <h3>保单生效中</h3>
+                      <p>2020-5-05</p>
+                    </van-step>
+                    <van-step>
+                      <h3>商品已售出</h3>
+                      <p>2020-5-05</p>
+                    </van-step>
+                    <van-step>
+                      <h3>优品库上架</h3>
+                      <p>2020-4-15</p>
+                    </van-step>
+                    <van-step>
+                      <h3>成衣送检完成【合格】</h3>
+                      <p>2020-4-10</p>
+                    </van-step>
+                    <van-step>
+                      <h3>在江苏AB集团股份有限公司生成完成</h3>
+                      <p>2020-3-15</p>
+                    </van-step>
+                    <van-step>
+                      <h3>面料检测完成【合格】</h3>
+                      <p>2020-1-11</p>
+                    </van-step>
+                </van-steps>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">常见问题</div>
+            </div>
+            <div class="view-body">
+                <van-collapse v-model="activeNames">
+                    <van-collapse-item v-for="(collapseItem, collapseIndex) in goods.collapse" :key="collapseIndex" :title="collapseItem.title" :name="collapseIndex">{{collapseItem.content}}</van-collapse-item>
+                  </van-collapse>
+            </div>
+        </div>
+        <div class="commentFixed" @click="commentShow=true">
+            <van-icon name="comment-o"></van-icon>
+            <p>留言</p>
+        </div>
+        <van-popup class="commentShow" v-model="commentShow" position="bottom" :style="{ height: '90vh' }" get-container="#app" closeable round>
+            <h2>留言</h2>
+            <van-form validate-first @submit="onSubmit">
+                <van-field label="标题" v-model="form.title" name="title"  placeholder="请输入标题" :rules="[{ required: true, message: '请输入标题' }]" maxlength="200"></van-field>
+                <van-field label="类型" :value="form.type" placeholder="选择类型" :rules="[{ required: true, message: '请选择类型' }]" @click="showPicker = true" readonly clickable></van-field>
+                <van-field label="手机号" v-model="form.phone"  type="tel" name="phone"  placeholder="请输入手机号" :rules="[{ validator, message: '请输入手机号' }]" maxlength="11"></van-field>
+                <van-field label="内容" v-model="form.content" name="content"  placeholder="请输入内容" :rules="[{ required: true, message: '请输入内容' }]" maxlength="200" show-word-limit rows="4"
+                autosize></van-field>
+                <div style="margin: 16px;">
+                    <van-button round block type="info" :loading="loading" native-type="submit">提交</van-button>
+                  </div>
+            </van-form>
+        </van-popup>
+        <van-popup v-model="showPicker" round position="bottom">
+            <van-picker
+              show-toolbar
+              :columns="columns"
+              @cancel="showPicker = false"
+              @confirm="onConfirm"
+            />
+          </van-popup>
+        <div class="phone400">400全国溯源电话</div>
+    </div>
+    <script>
+        //http://you.163.com/item/detail?id=3998150
+        Vue.use(vuePhotoPreview);
+        new Vue({
+            el: '#app',
+            data: {
+                loadShow: false,
+                active: 0,
+                commentShow: false,
+                parameterPopupShow: false,
+                autoHeight:"700px",
+                activeNames: [0],
+                loading:false,
+                form:{
+                    title:"",
+                    type:"",
+                    phone:"",
+                    content:"",
+                },
+                showPicker: false,
+                columns: ['产品咨询','产品建议', '功能异常', '违规', '其他'],
+                goods: {
+                    banner: [
+                        'banner/img/topBanner1.webp',
+                        'banner/img/topBanner2.webp',
+                        'banner/img/topBanner3.webp'
+                    ],
+                    parameter: [{
+                        key: '产品名称',
+                        value: '男士全棉短裤',
+                    }, {
+                        key: '品牌',
+                        value: 'A&B',
+                    }, {
+                        key: '生产厂家',
+                        value: '江苏AB集团股份有限公司',
+                    }, {
+                        key: '上市时间',
+                        value: '2020年4月20日',
+                    }, {
+                        key: '产品等级',
+                        value: '一等品',
+                    }, {
+                        key: '面料',
+                        value: '卡其布',
+                    }, {
+                        key: '货号',
+                        value: 'HYX-30-819',
+                    }, {
+                        key: '弹力',
+                        value: '微弹',
+                    }, {
+                        key: '基础风格',
+                        value: '时尚都市',
+                    }, {
+                        key: '上市年份',
+                        value: '2021年夏季',
+                    }, {
+                        key: '厚薄',
+                        value: '常规',
+                    }, {
+                        key: '销售渠道',
+                        value: '电商/线下',
+                    }, {
+                        key: '材质成分',
+                        value: '棉100%(不可干洗)',
+                    }, {
+                        key: '执行标准',
+                        value: 'GB 18401-2010',
+                    }, ],
+                    certificate: [{
+                        title: "检验检测报告-1",
+                        src: "img/certificate/certificate1.jpg"
+                    }, {
+                        title: "检验检测报告-2",
+                        src: "img/certificate/certificate2.jpg"
+                    }, {
+                        title: "检验检测报告-3",
+                        src: "img/certificate/certificate3.jpg"
+                    }, {
+                        title: "检验检测报告-4",
+                        src: "img/certificate/certificate4.jpg"
+                    }, {
+                        title: "检验检测报告-5",
+                        src: "img/certificate/certificate5.jpg"
+                    }, ],
+                    company: {
+                        info: "江苏AB集团股份有限公司位于昆山市前进路西端，与美丽的阳澄湖为伴,“集团公司旗下主要有AB、A&B、 T6等品牌，在全国有100多家销售公司，5000多个销售网点,  如今，AB集团已进入了一个新的发展阶段，审时度势制定了五年发展战略规划纲要，决心以敢为天下先的大无畏精神，努力将AB品牌打造成中国针织内衣服饰第一品牌， 推动中国内衣服饰业加快发展，引领中国内衣服饰业走向世界。",
+                        img: [{
+                            title: "工厂环境-1",
+                            src: "img/company/company1.jpg"
+                        }, {
+                            title: "工厂环境-2",
+                            src: "img/company/company2.jpg"
+                        }, {
+                            title: "工厂环境-3",
+                            src: "img/company/company3.jpg"
+                        }, {
+                            title: "工厂环境-4",
+                            src: "img/company/company4.jpg"
+                        }, {
+                            title: "工厂环境-5",
+                            src: "img/company/company5.jpg"
+                        }, {
+                            title: "工厂环境-6",
+                            src: "img/company/company6.jpg"
+                        }, ]
+                    },
+                    rawMaterials:{
+                        parameter:[
+                            {
+                                key: '品质标准',
+                                value: '美国纺织化学家和染料家协会(AATCC)',  
+                            },
+                            {
+                                key: '品名',
+                                value: 'T400',  
+                            },
+                            {
+                                key: '成分及含量',
+                                value: '100%棉',  
+                            },
+                            {
+                                key: '密度',
+                                value: '300t',  
+                            },
+                            {
+                                key: '染整工艺',
+                                value: '染色',  
+                            },
+                            {
+                                key: '花型工艺',
+                                value: '扎染',  
+                            },
+                        ],
+                        img:[
+                        {
+                            title: "牛津布",
+                            src: "img/rawMaterials/rawMaterials1.jpg"
+                        }, {
+                            title: "检测报告",
+                            src: "img/certificate/certificate1.jpg"
+                        },
+                        ]
+                    },
+                    evaluationTag:['很舒服(15)',' 穿上很合适(11)','尺码合适(8)','价格比较实惠(8)','凉快(2)',' 纯棉(26) '],
+                    evaluationList:[
+                        {
+                            userName:"t***8",
+                            content:"短裤收到了质量非常好，尺码标准上身效果也很好看",
+                            size:"30",
+                            color:"卡其",
+                            time:"2021-05-19" 
+                        },
+                        {
+                            userName:"阔***淘",
+                            content:"商品收到了，质量很好的，走线均匀，大小很合适",
+                            size:"31",
+                            color:"卡其",
+                            time:"2021-05-23" 
+                        },
+                        {
+                            userName:"y***u",
+                            content:"短裤质量很好，做工也不错，裤型很好，穿上很舒服，非常喜欢",
+                            size:"29",
+                            color:"黑色",
+                            time:"2020-06-13" 
+                        },
+                        {
+                            userName:"t***2",
+                            content:"做工精细，穿上感觉好，料子柔软舒适透气，一次愉快的购物，老公喜欢，以后就在贵店买裤子了。",
+                            size:"36",
+                            color:"藏青",
+                            time:"2020-06-06" 
+                        },
+                        {
+                            userName:"康***恐",
+                            content:"宝贝儿收到了！面料舒服，做工精致，穿上很显瘦，店家服务也很到位，一次满意的网购！",
+                            size:"36",
+                            color:"卡其",
+                            time:"2020-06-30" 
+                        },
+                        {
+                            userName:"x***g",
+                            content:"纯棉面料，穿着舒服，透气性挺好，掌柜推荐的尺码非常合适",
+                            size:"32",
+                            color:"卡其",
+                            time:"2020-06-24" 
+                        },
+                    ],
+                    collapse:[
+                        {
+                            title:"出现质量问题如何退货？",
+                            content:"如您发现产品出现问题，系统审核通过以后，按照保险公司理赔标准进行赔付。"
+                        },
+                        {
+                            title:"出现那些问题保险公司拒保？",
+                            content:"卡片丢失，保安区损坏或刮开，未按照说明书洗涤方式进行洗涤！"
+                        },
+                    ],
+                },
+            },
+            mounted: function() {
+                var vm = this;
+                this.loadShow = true;
+                // vant.Toast('提示');
+                vm.$nextTick(function() {
+                    vm.$previewRefresh(); //图片预览
+                });
+            },
+            methods: {
+                onConfirm(value) {
+                    this.form.type = value;
+                    this.showPicker = false;
+                },
+                validator(val){
+                    var isphone = /^[1][0-9]{10}$/;
+                    return  isphone.test(val)
+                },
+                onSubmit(info) {
+                    console.log('info', info);
+                    this.loading = true;
+                    setTimeout(()=>{
+                        vant.Dialog.alert({
+                            title: '提交成功',
+                            message: '已经收到您的信息，我们会在1-4个工作日给你回复',
+                        }).then(() => {
+                            this.form ={
+                                title:"",
+                                type:"",
+                                phone:"",
+                                content:"",
+                            };
+                            this.loading = false;
+                            this.commentShow = false;
+                        });
+                    },1000)
+                  
+                },
+                formatPrice() {
+                    return '¥' + (this.goods.price / 100).toFixed(2);
+                },
+                createSeal(company, name) {
+                    if (company) {
+                        function BezierEllipse4(ctx, x, y, a, b) {
+                            var k = 0.5522848,
+                                ox = a * k, // 水平控制点偏移量
+                                oy = b * k; // 垂直控制点偏移量</p> <p>
+                            ctx.beginPath();
+                            //从椭圆的左端点开始顺时针绘制四条三次贝塞尔曲线
+                            ctx.moveTo(x - a, y);
+                            ctx.bezierCurveTo(x - a, y - oy, x - ox, y - b, x, y - b);
+                            ctx.bezierCurveTo(x + ox, y - b, x + a, y - oy, x + a, y);
+                            ctx.bezierCurveTo(x + a, y + oy, x + ox, y + b, x, y + b);
+                            ctx.bezierCurveTo(x - ox, y + b, x - a, y + oy, x - a, y);
+                            ctx.closePath();
+                            ctx.stroke();
+                        }
+                        var canvas = document.createElement("canvas");
+                        canvas.width = 165;
+                        canvas.height = 165;
+                        var context = canvas.getContext("2d");
+                        context.strokeStyle = "red"; //设置文本颜色
+                        context.textBaseline = "middle"; //设置文本的垂直对齐方式
+                        context.textAlign = "center"; //设置文本的水平对对齐方式
+                        context.lineWidth = 2; //椭圆1宽度
+                        //3个参数： 左边距 上边据 宽度 椭圆扁度
+                        BezierEllipse4(context, 85, 79, 79, 55); //椭圆1
+                        context.lineWidth = 1;
+                        BezierEllipse4(context, 85, 79, 76, 52); //椭圆2
+
+                        // 绘制印章类型
+                        context.font = "bolder 15px SimSun";
+                        context.lineWidth = 1;
+                        context.fillStyle = "#f00";
+                        context.fillText(name, canvas.width / 2 + 3, canvas.height / 2 + 10);
+                        context.save();
+
+                        //绘制中文
+                        var ccircle = {
+                            x: canvas.width / 2,
+                            y: canvas.height / 2,
+                            radius: 59,
+                        };
+                        var cstartAngle = 170; //控制字符起始位置度数
+                        var cendAngle = 15; //首位字符相隔度数
+                        var cradius = ccircle.radius; //圆的半径
+                        var cangleDecrement = (cstartAngle - cendAngle) / (company.length - 1); //每个字母占的弧度
+                        context.font = "12px SimSun";
+                        var cratioX = 66 / ccircle.radius; //横轴缩放比率
+                        var cratioY = 57 / ccircle.radius; //纵轴缩放比率
+                        //进行缩放（均匀压缩）
+                        context.scale(cratioX, cratioY);
+                        var cindex = 0;
+                        for (var cindex = 0; cindex < company.length; cindex++) {
+                            context.save();
+                            context.beginPath();
+                            //绘制点
+                            context.translate(
+                                ccircle.x + Math.cos((Math.PI / 180) * cstartAngle) * cradius - 6,
+                                ccircle.y - Math.sin((Math.PI / 180) * cstartAngle) * cradius + 14
+                            );
+                            context.rotate(Math.PI / 2 - (Math.PI / 180) * cstartAngle); //Math.PI/2为旋转90度  Math.PI/180*X为旋转多少度
+                            context.fillText(company.charAt(cindex), 0, 0);
+                            context.strokeText(company.charAt(cindex), 0, 0);
+                            cstartAngle -= cangleDecrement;
+                            context.restore();
+                        }
+                        return canvas.toDataURL();
+                    }
+
+                },
+            }
+        });
+        
+        //亮点
+        //特性的文案
+
+    </script>
+</body>
+
+</html>

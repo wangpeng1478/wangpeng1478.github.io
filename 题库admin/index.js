@@ -21,6 +21,10 @@ app.all('*', function(req, res, next) {
 //encodeURIComponent 编码
 //decodeURIComponent 解码
 
+const topicName = `2020-社区管理与服务.json`;
+// const topicName = `2020-移动互联网技术.json`;
+// const topicName = `2021-移动互联网技术.json`;
+
 // list
 app.get("/getList", async(req, res) => {
         try {
@@ -81,6 +85,7 @@ app.post("/add", urlencodedParser, async(req, res) => {
                 if (type === "ok") {
                     res.json({
                         code: 'ok',
+                        is:1,
                         result: response
                     })
                 } else {
@@ -98,6 +103,7 @@ app.post("/add", urlencodedParser, async(req, res) => {
                     if (type === "ok") {
                         res.json({
                             code: 'ok',
+                            is:2,
                             result: response
                         })
                     } else {
@@ -161,6 +167,37 @@ app.post("/delete", urlencodedParser, async(req, res) => {
     }
 })
 
+// 修改文件名
+app.post("/modifyFileName", urlencodedParser, async(req, res) => {
+    try {
+        const { path } = req.body;
+        if (path) {
+            if(modifyFileName(path)){
+                res.json({
+                    code: 'ok',
+                    result: path
+                })
+            }else{
+                res.json({
+                    code: '-1',
+                    msg: '修改失败'
+                })  
+            }
+        } else {
+            res.json({
+                code: '-1',
+                msg: '参数错误'
+            })
+        }
+
+    } catch (err) {
+        res.json({
+            code: '-1',
+            msg: '请求失败'
+        })
+    }
+})
+
 // findFiles
 app.post("/findFiles", urlencodedParser, async(req, res) => {
     try {
@@ -205,7 +242,7 @@ app.post("/findFiles", urlencodedParser, async(req, res) => {
 //增加
 function writeJson(params) {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve('-1')
             }
@@ -214,7 +251,7 @@ function writeJson(params) {
             person.data.unshift(params);
             person.total = person.data.length;
             var str = JSON.stringify(person);
-            fs.writeFile('topic.json', str, function(err) {
+            fs.writeFile(topicName, str, function(err) {
                 if (err) {
                     resolve('-1')
                 }
@@ -226,7 +263,7 @@ function writeJson(params) {
 //查
 function pagination() {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve('-1')
             }
@@ -239,7 +276,7 @@ function pagination() {
 //删
 function deleteJson(n) {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve(err)
             }
@@ -252,7 +289,7 @@ function deleteJson(n) {
             }
             person.total = person.data.length;
             var str = JSON.stringify(person);
-            fs.writeFile('topic.json', str, function(err) {
+            fs.writeFile(topicName, str, function(err) {
                 if (err) {
                     resolve(err)
                 }
@@ -264,7 +301,7 @@ function deleteJson(n) {
 //update
 function updateJson(index, obj) {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve(err)
             }
@@ -273,7 +310,7 @@ function updateJson(index, obj) {
             person.data[index] = obj;
             person.total = person.data.length;
             var str = JSON.stringify(person);
-            fs.writeFile('topic.json', str, function(err) {
+            fs.writeFile(topicName, str, function(err) {
                 if (err) {
                     resolve(err)
                 }
@@ -286,7 +323,7 @@ function updateJson(index, obj) {
 
 function isRepeat(n) {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve(err)
             }
@@ -313,7 +350,7 @@ function isRepeat(n) {
 //查找
 function FindTopic(n) {
     return new Promise((resolve, reject) => {
-        fs.readFile('topic.json', function(err, data) {
+        fs.readFile(topicName, function(err, data) {
             if (err) {
                 resolve(err)
             }
@@ -335,10 +372,12 @@ function FindTopic(n) {
 //处理数据
 function dealStr(str) {
     if (str) {
+        str = str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, ""); //删除emoji
         str = str.replace(/^\s+|\s+$/g, ""); //去除两头空格
         str = str.replace(/(。$)/g, ""); //删除最后一个【。】
         str = str.replace(/^[A-Z]\./ig, ''); //删除开头A-Z+.
         str = str.replace(/^[0-9]+\./ig, ''); //删除开头0-9+.
+        str = str.replace(/^\s+|\s+$/g, ""); //去除两头空格
         return str
     }
     return ""
@@ -362,6 +401,46 @@ function repairPerRestore(str){
     return ""
 };
 
+
+//修改文件名称
+
+function modifyFileName(pathStr){
+    if(pathStr){
+        const pathArr = decodeURIComponent(pathStr).split('-');
+        if(pathArr.length===2){
+            try {
+                const pathList =  fs.readdirSync(`电子商务实践`);
+                let isRename = false;
+                pathList.forEach(filename => {
+                    // 确定新旧文件名称
+                    const oldPath = `电子商务实践/${filename}`;
+                    const newPath = `电子商务实践/${decodeURIComponent(pathStr)}.docx`;
+                    fs.renameSync(oldPath, newPath);
+                    isRename = true;
+                    // console.log(`修改成功-[${newPath}]`);
+                });
+                return isRename
+            } catch (error) {
+                console.log(error);
+                return false
+            }
+            
+        }else{
+            console.log(-1);
+            return false
+        }
+        
+    }else{
+        console.log(-2);
+        return false
+    }
+    
+};
+
 app.listen(9999, () => {
     console.log("http://localhost:9999");
 })
+
+
+
+
