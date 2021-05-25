@@ -406,15 +406,65 @@
             </van-swipe-item>
         </van-swipe> -->
         <!-- 顶部Banner-->
-
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">原辅料检测报告</div>
+            </div>
+            <div class="view-body">
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.rawMaterials.img">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box"> 
+                                <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
 
         <div class="view view-item">
             <div class="view-item-title">
-                <div class="view-item-title-name">资质证书</div>
+                <div class="view-item-title-name">成品检测报告</div>
             </div>
             <div class="view-body">
                 <van-row type="flex">
                     <template v-for="(bgItem, bgIndex) in goods.certificate">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box">
+                                <img :src="bgItem.src" preview="bg3" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">委托抽检报告</div>
+            </div>
+            <div class="view-body">
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.certificate">
+                        <van-col :key="bgIndex" span="12" class="certificateView">
+                            <div class="certificateView-box">
+                                <img :src="bgItem.src" preview="bg2" :preview-text="bgItem.title" width="100%">
+                                <div class="bgItem-title">{{bgItem.title}}</div>
+                            </div>
+                        </van-col>
+                    </template>
+                </van-row>
+            </div>
+        </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">委托授权书</div>
+            </div>
+            <div class="view-body">
+                <van-row type="flex">
+                    <template v-for="(bgItem, bgIndex) in goods.Authorization">
                         <van-col :key="bgIndex" span="12" class="certificateView">
                             <div class="certificateView-box">
                                 <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
@@ -425,6 +475,7 @@
                 </van-row>
             </div>
         </div>
+
         <div class="view view-item">
             <div class="view-item-title">
                 <div class="view-item-title-name">电子保险单</div>
@@ -467,10 +518,43 @@
                 </div>
             </div>
         </div>
+        <div class="view view-item">
+            <div class="view-item-title">
+                <div class="view-item-title-name">产品溯源信息</div>
+            </div>
+            <div class="view-body">
+                <van-steps direction="vertical" :active="0" active-color="#004fff" class="stepsView">
+                    <van-step>
+                      <h3>保单生效中</h3>
+                      <p>2020-5-05</p>
+                    </van-step>
+                    <van-step>
+                      <h3>商品已售出</h3>
+                      <p>2020-5-05</p>
+                    </van-step>
+                    <van-step>
+                      <h3>优品库上架</h3>
+                      <p>2020-4-15</p>
+                    </van-step>
+                    <van-step>
+                      <h3>成衣送检完成【合格】</h3>
+                      <p>2020-4-10</p>
+                    </van-step>
+                    <van-step>
+                      <h3>在江苏AB集团股份有限公司生成完成</h3>
+                      <p>2020-3-15</p>
+                    </van-step>
+                    <van-step>
+                      <h3>面料检测完成【合格】</h3>
+                      <p>2020-1-11</p>
+                    </van-step>
+                </van-steps>
+            </div>
+        </div>
 
         <div class="view view-item">
             <div class="view-item-title">
-                <div class="view-item-title-name">工厂信息</div>
+                <div class="view-item-title-name">工厂简介</div>
             </div>
             <div class="view-body">
                 <div class="company-info" v-html="goods.company.info"></div>
@@ -490,27 +574,11 @@
                 </van-row>
             </div>
         </div>
-        <div class="view view-item">
-            <div class="view-item-title">
-                <div class="view-item-title-name">原材料</div>
-            </div>
-            <div class="view-body">
-                <van-row type="flex">
-                    <template v-for="(bgItem, bgIndex) in goods.rawMaterials.img">
-                        <van-col :key="bgIndex" span="12" class="certificateView">
-                            <div class="certificateView-box"> 
-                                <img :src="bgItem.src" preview="bg1" :preview-text="bgItem.title" width="100%">
-                                <div class="bgItem-title">{{bgItem.title}}</div>
-                            </div>
-                        </van-col>
-                    </template>
-                </van-row>
-            </div>
-        </div>
+        
 
         <div class="view view-item">
             <div class="view-item-title">
-                <div class="view-item-title-name">图文介绍</div>
+                <div class="view-item-title-name">产品详情</div>
             </div>
             <div class="view-body graphicIntroductionView" :style="{height:autoHeight}">
                 <!-- 视频 -->
@@ -547,39 +615,7 @@
                 </div>
             </div>
         </div>
-        <div class="view view-item">
-            <div class="view-item-title">
-                <div class="view-item-title-name">产品溯源</div>
-            </div>
-            <div class="view-body">
-                <van-steps direction="vertical" :active="0" active-color="#004fff" class="stepsView">
-                    <van-step>
-                      <h3>保单生效中</h3>
-                      <p>2020-5-05</p>
-                    </van-step>
-                    <van-step>
-                      <h3>商品已售出</h3>
-                      <p>2020-5-05</p>
-                    </van-step>
-                    <van-step>
-                      <h3>优品库上架</h3>
-                      <p>2020-4-15</p>
-                    </van-step>
-                    <van-step>
-                      <h3>成衣送检完成【合格】</h3>
-                      <p>2020-4-10</p>
-                    </van-step>
-                    <van-step>
-                      <h3>在江苏AB集团股份有限公司生成完成</h3>
-                      <p>2020-3-15</p>
-                    </van-step>
-                    <van-step>
-                      <h3>面料检测完成【合格】</h3>
-                      <p>2020-1-11</p>
-                    </van-step>
-                </van-steps>
-            </div>
-        </div>
+       
         <div class="view view-item">
             <div class="view-item-title">
                 <div class="view-item-title-name">常见问题</div>
@@ -687,6 +723,16 @@
                         key: '执行标准',
                         value: 'GB 18401-2010',
                     }, ],
+                    Authorization:[
+                        {
+                            title:"授权书",
+                            src:"https://up-1254176432.cos.ap-shanghai.myqcloud.com/certificate11.jpg"
+                        },
+                        {
+                            title:"授权书信息",
+                            src:"https://up-1254176432.cos.ap-shanghai.myqcloud.com/certificate/certificate3.jpg"
+                        },
+                    ],
                     certificate: [{
                         title: "检验检测报告-1",
                         src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/certificate/certificate1.jpg"
@@ -699,13 +745,16 @@
                     }, {
                         title: "检验检测报告-4",
                         src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/certificate/certificate4.jpg"
-                    }, {
-                        title: "检验检测报告-5",
-                        src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/certificate/certificate5.jpg"
-                    }, ],
+                    }],
                     company: {
                         info: "江苏AB集团股份有限公司位于昆山市前进路西端，与美丽的阳澄湖为伴,“集团公司旗下主要有AB、A&B、 T6等品牌，在全国有100多家销售公司，5000多个销售网点,  如今，AB集团已进入了一个新的发展阶段，审时度势制定了五年发展战略规划纲要，决心以敢为天下先的大无畏精神，努力将AB品牌打造成中国针织内衣服饰第一品牌， 推动中国内衣服饰业加快发展，引领中国内衣服饰业走向世界。",
                         img: [{
+                            title: "资质证书",
+                            src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/company/company1-1.jpg"
+                        },{
+                            title: "荣誉证书",
+                            src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/company/company1-2.jpg"
+                        },{
                             title: "工厂环境-1",
                             src: "https://up-1254176432.cos.ap-shanghai.myqcloud.com/company/company1.jpg"
                         }, {
@@ -933,8 +982,9 @@
         });
         
         //亮点
+        //优势
         //特性的文案
-
+        //网红案例
     </script>
 </body>
 
